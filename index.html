@@ -9,95 +9,136 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 <style>
-:root{--hop:#00c46a;--hopd:#00a058;--yellow:#ffcc00;--blue:#3d7bff;--g:#f3f3f5;--m:#6b6b73}
+:root{--hop:#00c46a;--hopd:#009e55;--yellow:#ffcc00;--pink:#ff4f9a;--pink2:#ffe3ef;--blue:#3d7bff;--red:#e5484d;--g:#f3f3f5;--m:#6b6b73;--line:#ececf0}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#0a0a0b;color:#fff;font-family:Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 svg.lucide{width:1em;height:1em;stroke-width:2}
 button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
-.viewer{min-height:100vh;display:grid;grid-template-columns:330px 1fr}
-.side{padding:40px 30px;border-right:1px solid #1d1d20;display:flex;flex-direction:column;gap:22px;overflow:auto;height:100vh}
+/* viewer */
+.viewer{min-height:100vh;display:grid;grid-template-columns:320px 1fr}
+.side{padding:36px 26px;border-right:1px solid #1d1d20;display:flex;flex-direction:column;gap:18px;overflow:auto;height:100vh}
 .brand{font-size:26px;font-weight:800;letter-spacing:-.03em}.brand span{color:var(--hop)}
-.side p{color:#8e8e96;font-size:13.5px;line-height:1.5}
-.chap{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5d5d66;margin:6px 0 2px 4px}
-.nav{display:flex;flex-direction:column;gap:3px}
-.nav button{display:flex;gap:11px;align-items:center;text-align:left;padding:9px 12px;border-radius:12px;color:#c4c4c9;font-size:13.5px;font-weight:500}
-.nav button .n{width:24px;height:24px;border-radius:50%;background:#1a1a1d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#8e8e96;flex:0 0 24px}
-.nav button.on{background:#17171a;color:#fff}.nav button.on .n{background:var(--hop);color:#000}
+.side p{color:#8e8e96;font-size:13px;line-height:1.5}
+.acc{border:1px solid #1f1f23;border-radius:16px;overflow:hidden}
+.acc+.acc{margin-top:8px}
+.acc-h{width:100%;display:flex;align-items:center;gap:12px;padding:12px 14px;text-align:left}
+.acc-h .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 34px;color:#000}
+.acc-h b{display:block;font-size:14px}.acc-h small{color:#7d7d86;font-size:12px}
+.acc-h .chev{margin-left:auto;color:#6e6e76;transition:transform .2s}
+.acc.open{background:#121214}.acc.open .chev{transform:rotate(90deg)}
+.acc-b{display:none;padding:0 10px 10px}.acc.open .acc-b{display:block}
+.acc-b button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:8px 10px;border-radius:10px;color:#b9b9c0;font-size:13px}
+.acc-b button .n{width:22px;height:22px;border-radius:50%;background:#1d1d21;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:0 0 22px}
+.acc-b button.on{background:#1d1d21;color:#fff}.acc-b button.on .n{background:var(--hop);color:#000}
 .stage{display:flex;align-items:center;justify-content:center;height:100vh;padding:20px}
 .phone{width:390px;height:844px;border-radius:56px;background:#000;padding:12px;box-shadow:0 0 0 2px #2b2b30,0 40px 120px rgba(0,0,0,.6);position:relative;transform-origin:center}
-.screen{width:100%;height:100%;border-radius:46px;overflow:hidden;position:relative;background:#0b0c0e}
-.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000;z-index:30}
-.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 32px 0 36px;font-size:15px;font-weight:600;z-index:25;color:#fff}
-.status.dk{color:#000}
+.screen{width:100%;height:100%;border-radius:46px;overflow:hidden;position:relative;background:#fff}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000;z-index:40}
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 32px 0 36px;font-size:15px;font-weight:600;z-index:35;color:#000}
+.status.lt{color:#fff}
 .status .r{display:flex;gap:6px;align-items:center;font-size:14px}
-.view{position:absolute;inset:0;display:none}.view.on{display:block}
-.map{position:absolute;inset:0}.map svg{width:100%;height:100%;display:block}
+.view{position:absolute;inset:0;display:none;background:#fff;color:#000}.view.on{display:block}
+/* maps */
+.map{position:absolute;left:0;right:0;top:0;background:#0b0c0e}.map svg{width:100%;height:100%;display:block}
 .topbar{position:absolute;top:58px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10;gap:8px}
-.circle{width:44px;height:44px;border-radius:50%;background:rgba(20,20,22,.92);display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid #26262a;flex:0 0 44px;color:#fff}
-.back{width:38px;height:38px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;color:#000;flex:0 0 38px}
-.chip{background:rgba(20,20,22,.94);border:1px solid #26262a;border-radius:22px;padding:10px 14px;font-size:13px;font-weight:600;display:flex;gap:8px;align-items:center}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--hop);box-shadow:0 0 0 4px rgba(0,196,106,.18)}
-.dot.y{background:var(--yellow);box-shadow:0 0 0 4px rgba(255,204,0,.18)}
-.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;color:#000;border-radius:28px 28px 0 0;padding:10px 18px 26px;z-index:12;box-shadow:0 -20px 60px rgba(0,0,0,.5);max-height:82%;overflow:auto;scrollbar-width:none}
-.sheet.full{top:0;max-height:none;border-radius:0;padding-top:60px}
-.grab{width:38px;height:5px;border-radius:3px;background:#d5d5da;margin:0 auto 12px}
-.hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.hd .small{font-weight:700}
-.h1{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.12}
-.sub{font-size:13.5px;color:var(--m);margin-top:3px}
-.opts{margin-top:12px;display:flex;flex-direction:column;gap:8px}
-.opt{display:grid;grid-template-columns:44px 1fr auto;gap:11px;align-items:center;padding:11px 12px;border-radius:16px;border:2px solid transparent;background:var(--g);text-align:left;width:100%;color:#000}
-.opt.sel{border-color:#000;background:#fff}
-.opt .ico{width:44px;height:38px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
-.opt.sel .ico{background:var(--g)}
-.opt .t{font-size:15px;font-weight:700;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.opt .d{font-size:12.5px;color:var(--m);margin-top:2px;line-height:1.35}
-.opt .p{font-size:16px;font-weight:800;text-align:right;white-space:nowrap}
-.opt .p small{display:block;font-size:11px;font-weight:600;color:var(--m)}
-.tag{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--hop);color:#000;border-radius:6px;padding:2px 6px}
-.cta{margin-top:14px;width:100%;background:#000;color:#fff;border-radius:16px;padding:16px;font-size:16.5px;font-weight:700;display:flex;justify-content:center;gap:8px;align-items:center}
+.circle{width:42px;height:42px;border-radius:50%;background:rgba(18,18,20,.9);display:flex;align-items:center;justify-content:center;font-size:19px;border:1px solid #2a2a2f;color:#fff;flex:0 0 42px}
+.chip{background:rgba(18,18,20,.92);border:1px solid #2a2a2f;border-radius:22px;padding:9px 13px;font-size:12.5px;font-weight:600;display:flex;gap:8px;align-items:center;color:#fff}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--hop);box-shadow:0 0 0 4px rgba(0,196,106,.2)}
+.dot.y{background:var(--yellow);box-shadow:0 0 0 4px rgba(255,204,0,.2)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;color:#000;border-radius:26px 26px 0 0;padding:10px 18px 24px;z-index:12;box-shadow:0 -18px 50px rgba(0,0,0,.35);display:flex;flex-direction:column}
+.grab{width:38px;height:5px;border-radius:3px;background:#d8d8de;margin:0 auto 12px;flex:0 0 5px}
+.page{position:absolute;inset:0;padding:60px 18px 24px;display:flex;flex-direction:column;background:#fff}
+.hd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.back{width:36px;height:36px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;color:#000;flex:0 0 36px}
+.hd .s{font-size:12.5px;font-weight:700;color:var(--m)}
+.stepper{display:flex;gap:4px;margin-bottom:14px}.stepper i{flex:1;height:4px;border-radius:2px;background:#e6e6eb}.stepper i.on{background:#000}
+.h1{font-size:25px;font-weight:800;letter-spacing:-.03em;line-height:1.12}
+.sub{font-size:13.5px;color:var(--m);margin-top:4px;line-height:1.35}
+.spacer{flex:1}
+.cta{width:100%;background:#000;color:#fff;border-radius:16px;padding:16px;font-size:16.5px;font-weight:700;display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.cta.c{justify-content:center}
+.cta span:last-child{opacity:.75;font-weight:600}
 .small{font-size:12px;color:var(--m)}
-.legs{margin-top:12px;display:flex;flex-direction:column}
-.leg{display:grid;grid-template-columns:30px 1fr;gap:10px;position:relative;padding-bottom:12px}
-.leg:before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:#e3e3e8}
-.leg:last-child:before{display:none}
-.leg .b{width:30px;height:30px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
-.leg .b.m{background:var(--yellow);color:#000}
-.leg .lt{display:flex;justify-content:space-between;font-weight:700;font-size:14.5px}
-.leg .ld{font-size:12.5px;color:var(--m);margin-top:1px}
-.swaps{display:flex;gap:6px;margin-top:7px}
-.sw{flex:1;border:1.5px solid #e1e1e6;border-radius:12px;padding:6px 4px;font-size:12px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;color:#000}
-.sw small{font-weight:600;color:var(--m);font-size:11px}
-.sw.on{border-color:#000;background:#000;color:#fff}.sw.on small{color:#bbb}
-.total{display:flex;justify-content:space-between;align-items:center;background:var(--g);border-radius:16px;padding:12px 14px;margin-top:4px}
-.total .v{font-size:22px;font-weight:800;letter-spacing:-.02em}
-.total .k{font-size:12px;color:var(--m);font-weight:600}
-.arrive{display:flex;gap:6px;align-items:center;font-size:12.5px;font-weight:700;color:var(--hopd);margin-top:3px}
-.veh{margin:16px auto 8px;width:210px;border:2.5px solid #000;border-radius:44px 44px 22px 22px;padding:16px 16px 18px}
-.veh.car{border-radius:64px 64px 34px 34px;width:232px;padding:28px 16px 22px}
-.seatrow{display:flex;gap:10px;justify-content:center;margin-bottom:10px}
-.seatrow:last-child{margin-bottom:0}
-.seat{width:58px;height:54px;border-radius:12px;border:2px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:700;background:#fff;color:#000}
-.seat svg{font-size:17px}
-.seat.taken{background:#e9e9ee;border-color:#e9e9ee;color:#9a9aa2}
-.seat.drv{background:#000;color:#fff;border-color:#000}
-.seat.off{border-style:dashed;color:#aaa;border-color:#c8c8cf}
+/* option rows (uber style) */
+.olist{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.orow{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:16px;border:2px solid transparent;text-align:left;width:100%;color:#000;background:#fff}
+.orow.sel{border-color:#000;background:#fafafa}
+.orow .veh{width:52px;height:44px;border-radius:14px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:26px}
+.orow .t{font-size:15px;font-weight:700;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.orow .d{font-size:12.5px;color:var(--m);margin-top:2px}
+.orow .p{font-size:16px;font-weight:800;text-align:right;white-space:nowrap}
+.orow .p small{display:block;font-size:11px;color:var(--m);font-weight:600}
+.tag{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 6px;background:var(--hop);color:#000}
+.tag.k{background:#000;color:#fff}.tag.r{background:#ffe2e2;color:#c42b1c}.tag.g{background:#dff7ea;color:#0a7a45}
+/* trip summary */
+.sum{display:flex;justify-content:space-between;align-items:flex-end}
+.sum .big{font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.sum .reach{display:inline-flex;gap:6px;align-items:center;margin-top:6px;font-size:12.5px;font-weight:700;color:var(--hopd);background:#e8f8ef;border-radius:20px;padding:4px 10px}
+.bar{display:flex;gap:3px;margin-top:14px;height:30px}
+.bar div{border-radius:9px;display:flex;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:700;color:#000;transition:flex .35s}
+.bar .w{background:#e9e9ee}.bar .x{background:var(--yellow)}.bar .s{background:#c9f0da}
+.seg{display:flex;background:var(--g);border-radius:12px;padding:3px;margin-top:14px}
+.seg button{flex:1;padding:8px 4px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--m)}
+.seg button.on{background:#fff;color:#000;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.legname{font-size:12.5px;color:var(--m);margin-top:12px;font-weight:600}
+/* vehicles (seat maps) */
+.vehbox{margin:14px auto 6px;position:relative}
+.erick{width:230px;border:3px solid #111;border-radius:70px 70px 26px 26px;padding:22px 18px 18px;background:#fafafa}
+.car{width:236px;border:3px solid #111;border-radius:80px 80px 40px 40px;padding:30px 18px 22px;background:#fafafa}
+.lbl{font-size:10.5px;font-weight:700;color:var(--m);text-align:center;letter-spacing:.04em;text-transform:uppercase;margin:6px 0}
+.srow{display:flex;gap:10px;justify-content:center}
+.seat{width:60px;height:56px;border-radius:14px;border:2px solid #111;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:700;color:#000}
+.seat svg{font-size:18px}
+.seat.drv{background:#111;color:#fff;border-color:#111}
+.seat.taken{background:#e8e8ed;border-color:#e8e8ed;color:#9b9ba3}
 .seat.mine{background:var(--hop);border-color:var(--hop)}
-.legend{display:flex;gap:12px;justify-content:center;font-size:11.5px;color:var(--m);font-weight:600;margin-top:6px}
+.seat.pink{background:var(--pink2);border-color:var(--pink);color:#c2185b}
+.seat.off{border-style:dashed;border-color:#c7c7cf;color:#a5a5ad;background:transparent}
+.seat.ghost{visibility:hidden}
+.legend{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:11.5px;color:var(--m);font-weight:600;margin-top:8px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
-.rows{margin-top:12px;background:var(--g);border-radius:16px;padding:2px 14px}
-.rw{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #e3e3e8;font-size:14px}
-.rw:last-child{border-bottom:0}
-.rw .l{display:flex;gap:10px;align-items:center;font-weight:600}
-.rw .l small{display:block;font-size:11.5px;color:var(--m);font-weight:500}
-.rw b{font-weight:800}
-.payrow{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:14px;font-weight:600}
-.upi{font-size:11px;font-weight:800;background:var(--g);border-radius:6px;padding:3px 7px;margin-right:6px}
-.card{background:var(--g);border-radius:16px;padding:12px;margin-top:10px}
-.driver{display:flex;gap:11px;align-items:center}
-.av{width:42px;height:42px;border-radius:50%;background:#1d1d20;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:0 0 42px}
-.driver .nm{font-weight:800;font-size:15px}.driver .mt{font-size:12px;color:var(--m);margin-top:1px}
-.plate{margin-left:auto;white-space:nowrap;font-weight:800;font-size:11.5px;background:#fff;border:1.5px solid #000;border-radius:8px;padding:4px 7px}
+.note{display:flex;gap:10px;align-items:center;background:var(--g);border-radius:14px;padding:11px 12px;margin-top:10px;font-size:12.5px;font-weight:600;line-height:1.35}
+.note svg{font-size:18px;flex:0 0 auto}
+.note.pk{background:var(--pink2);color:#a3134f}
+.drvc{display:flex;gap:11px;align-items:center;background:var(--g);border-radius:14px;padding:10px 12px;margin-top:10px}
+.av{width:40px;height:40px;border-radius:50%;background:#1d1d20;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:0 0 40px}
+.drvc b{font-size:14.5px}.drvc span{display:block;font-size:12px;color:var(--m)}
+.plate{margin-left:auto;white-space:nowrap;font-weight:800;font-size:11px;background:#fff;border:1.5px solid #000;border-radius:7px;padding:4px 7px}
+/* pay */
+.receipt{margin-top:14px;border:1.5px solid var(--line);border-radius:18px;overflow:hidden}
+.rrow{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.rrow:last-child{border-bottom:0}
+.rrow .i{width:40px;height:40px;border-radius:12px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:20px}
+.rrow b{font-size:14px;display:block}.rrow span{font-size:12px;color:var(--m)}
+.rrow .p{font-weight:800;font-size:14.5px}
+.rtot{display:flex;justify-content:space-between;align-items:center;background:#000;color:#fff;padding:14px}
+.rtot b{font-size:22px;letter-spacing:-.02em}
+.pm{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--g);font-size:14px;font-weight:600}
+.upi{font-size:11px;font-weight:800;background:#fff;border-radius:6px;padding:3px 7px;margin-right:8px}
+.chk{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.chk div{display:flex;gap:8px;align-items:center;font-size:12.5px;font-weight:600}
+.chk svg{color:var(--hopd);font-size:16px}
+/* intercity */
+.route{border:1.5px solid var(--line);border-radius:16px;padding:4px 14px;margin-top:12px;position:relative}
+.route .r{display:flex;gap:10px;align-items:center;padding:10px 0;font-size:14.5px;font-weight:700}
+.route .r+.r{border-top:1px solid var(--line)}
+.route .r i{width:10px;height:10px;border-radius:50%;background:#000;flex:0 0 10px}.route .r i.sq{border-radius:2px}
+.arr{display:flex;gap:8px;margin-top:10px}
+.arr div{flex:1;background:var(--g);border-radius:12px;padding:8px 10px;font-size:12px;color:var(--m);font-weight:600}
+.arr b{display:block;color:#000;font-size:14px}
+.modes{display:flex;gap:6px;margin-top:12px;overflow:hidden}
+.modes button{padding:7px 12px;border-radius:20px;background:var(--g);font-size:12.5px;font-weight:700;white-space:nowrap;color:#000}
+.modes button.on{background:#000;color:#fff}
+.ic-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.ic{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:16px;border:2px solid transparent;background:#fff;box-shadow:0 0 0 1px var(--line) inset;text-align:left;color:#000;width:100%}
+.ic.sel{box-shadow:none;border-color:#000}
+.ic .e{width:44px;height:44px;border-radius:12px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:22px}
+.ic .t{font-weight:800;font-size:14px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ic .d{font-size:12px;color:var(--m);margin-top:2px}
+.ic .p{font-weight:800;font-size:15px;text-align:right;white-space:nowrap}.ic .p small{display:block;font-size:10.5px;color:var(--m);font-weight:600}
+.cars{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+/* live + misc */
+.ok{width:50px;height:50px;border-radius:50%;background:var(--hop);display:flex;align-items:center;justify-content:center;font-size:27px;color:#000;flex:0 0 50px}
 .steps{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;font-weight:700;color:var(--m)}
 .steps .s{display:flex;align-items:center;gap:5px;white-space:nowrap}
 .steps .s i{width:9px;height:9px;border-radius:50%;background:#c9c9cf;display:block}
@@ -106,27 +147,14 @@ button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
 .row2{display:flex;gap:8px;margin-top:12px}
 .ghost{flex:1;background:var(--g);border-radius:14px;padding:11px 6px;font-size:12.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;color:#000}
 .ghost svg{font-size:19px}.ghost.sos{background:#fff0ef;color:#d92c20}
-.list{margin-top:10px;display:flex;flex-direction:column}
-.li{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;padding:6px 0}
-.li svg{font-size:16px;color:var(--hopd);flex:0 0 auto}
-.cars{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.carc{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:16px;background:var(--g);border:2px solid transparent;text-align:left;color:#000;width:100%}
-.carc.sel{background:#fff;border-color:#000}
-.carc .t{font-weight:800;font-size:14px}.carc .d{font-size:12px;color:var(--m);margin-top:1px}
-.carc .p{font-weight:800;font-size:12.5px;text-align:right;white-space:nowrap}
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.cmpc{border-radius:16px;padding:12px;background:var(--g);border:2px solid transparent;text-align:left;color:#000}
-.cmpc.sel{background:#fff;border-color:#000}
-.cmpc .k{font-size:12px;font-weight:700;color:var(--m)}
-.cmpc .v{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:3px 0 1px}
-.cmpc .d{font-size:12px;color:var(--m);line-height:1.35}
-.ok{width:52px;height:52px;border-radius:50%;background:var(--hop);display:flex;align-items:center;justify-content:center;font-size:28px;color:#000;flex:0 0 52px}
-.qr{width:92px;height:92px;border-radius:12px;background:#fff;border:1px solid #e3e3e8;padding:5px;flex:0 0 92px}
-.qr img{width:100%;height:100%;image-rendering:pixelated;display:block}
-.toast{position:absolute;top:58px;left:12px;right:12px;z-index:14;background:rgba(28,28,31,.97);border:1px solid #2c2c31;border-radius:22px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.qrcard{display:flex;gap:12px;align-items:center;border:1.5px solid var(--line);border-radius:16px;padding:10px;margin-top:10px}
+.qrcard img{width:96px;height:96px;image-rendering:pixelated;flex:0 0 96px}
+.qrcard b{font-size:14px}.qrcard .lg{font-size:12px;color:var(--m);margin-top:3px;line-height:1.45}
+.toast{position:absolute;top:58px;left:12px;right:12px;z-index:14;background:rgba(28,28,31,.97);border:1px solid #2c2c31;border-radius:22px;padding:12px 14px;display:flex;gap:12px;align-items:center;color:#fff}
 .toast .ap{width:36px;height:36px;border-radius:10px;background:#000;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:var(--hop)}
 .toast b{font-size:14px}.toast span{display:block;font-size:12px;color:#a1a1aa}
-.stepper{display:flex;gap:4px;margin-bottom:12px}.stepper i{flex:1;height:4px;border-radius:2px;background:#e3e3e8}.stepper i.on{background:#000}
+.li{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;padding:6px 0}
+.li svg{font-size:16px;color:var(--hopd);flex:0 0 auto}
 @media (max-width:860px){.viewer{grid-template-columns:1fr}.side{border-right:0;padding:24px;height:auto}.stage{height:auto;padding:10px 0 40px}}
 html.shot,body.shot{background:transparent}body.shot .side{display:none}body.shot .viewer{grid-template-columns:1fr}body.shot .stage{padding:0;height:auto}body.shot .phone{box-shadow:none}
 </style>
@@ -135,214 +163,255 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
 <div class="viewer">
   <aside class="side">
     <div><div class="brand">Ola <span>Hop</span></div>
-      <p style="margin-top:8px">Book the seat, not the vehicle. Follow Aarav's morning from his PG to a 9 AM class, then Sameer's Pune → Mumbai pool. Tap through, or use ← → keys.</p></div>
-    <div class="nav" id="nav"></div>
-    <p style="font-size:12px">Hop prices are illustrative. Metro fare (DMRC 5–12 km slab, ₹32), BEST bus ₹10 and the Kurla → BKC shared auto ₹25 are current local fares. Shivam Purbe · Ola Electric APM assignment</p>
+      <p style="margin-top:8px">Book the seat, not the vehicle. Pick a rider and tap through their trip, or use ← → keys.</p></div>
+    <div id="nav"></div>
+    <p style="font-size:12px">Hop, cab, bus and flight prices are illustrative. DMRC 5–12 km slab ₹32 and BEST bus ₹10 are current fares. Shivam Purbe · Ola Electric APM assignment</p>
   </aside>
   <main class="stage">
     <div class="phone" id="phone"><div class="screen">
       <div class="island"></div>
       <div class="status" id="status"><span>8:12</span><span class="r"><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></span></div>
 
-      <section class="view" id="s1" data-dark>
-        <div class="map" data-map="plan"></div>
+      <!-- 1 PLAN -->
+      <section class="view" id="s1" data-lt>
+        <div class="map" style="bottom:0" data-map="plan"></div>
         <div class="topbar"><div class="chip"><span class="dot"></span>Class at 9:00 AM · DTU</div><div class="circle"><i data-lucide="user-round"></i></div></div>
         <div class="sheet">
           <div class="grab"></div>
           <div class="h1">Model Town → DTU</div>
-          <div class="sub">Pick how you want to go. One payment either way.</div>
-          <div class="opts">
-            <button class="opt sel" data-sel><span class="ico">🛺</span><span><span class="t">Shared all the way <span class="tag">Cheapest</span></span><span class="d">E-rickshaw · Metro · E-rickshaw<br>36 min · reach 8:48</span></span><span class="p">₹67</span></button>
-            <button class="opt" data-sel><span class="ico">🏍️</span><span><span class="t">Faster ends</span><span class="d">Bike · Metro · Bike<br>31 min · reach 8:43</span></span><span class="p">₹97<small>est.</small></span></button>
-            <button class="opt" data-sel><span class="ico">🚗</span><span><span class="t">Cab, just you</span><span class="d">Door to door, Outer Ring Road traffic<br>44 min · reach 8:56</span></span><span class="p">₹380<small>est.</small></span></button>
+          <div class="sub">3 ways to go. One payment, whichever you pick.</div>
+          <div class="olist">
+            <button class="orow sel" data-sel><span class="veh">🛺</span><span><span class="t">Shared all the way <span class="tag">Cheapest</span></span><span class="d">E-rickshaw · metro · e-rickshaw · reach 8:48</span></span><span class="p">₹67<small>36 min</small></span></button>
+            <button class="orow" data-sel><span class="veh">🏍️</span><span><span class="t">Bike to and from metro</span><span class="d">Bike · metro · bike · reach 8:43</span></span><span class="p">₹97<small>31 min</small></span></button>
+            <button class="orow" data-sel><span class="veh">🚕</span><span><span class="t">Cab, just you</span><span class="d">Door to door · Outer Ring Road traffic</span></span><span class="p">₹380<small>44 min</small></span></button>
           </div>
-          <button class="cta" data-go="s2">See the legs</button>
+          <button class="cta" data-go="s2"><span>Continue with Shared</span><span>₹67</span></button>
         </div>
       </section>
 
-      <section class="view" id="s2">
-        <div class="sheet full">
-          <div class="hd"><button class="back" data-go="s1"><i data-lucide="chevron-left"></i></button><div class="small">Step 1 of 3 · Your trip</div></div>
-          <div class="stepper"><i class="on"></i><i></i><i></i></div>
-          <div class="h1">Swap any leg</div>
-          <div class="sub">Time and price update as you choose.</div>
-          <div class="legs">
-            <div class="leg"><span class="b"><i data-lucide="house"></i></span><div>
-              <div class="lt"><span>PG → Model Town metro</span><span id="l1p">₹15</span></div><div class="ld" id="l1d">Shared e-rickshaw · 6 min · 1.5 km</div>
-              <div class="swaps" data-leg="1"><button class="sw on" data-v="15,6,Shared e-rickshaw">🛺 Shared<small>₹15 · 6 min</small></button><button class="sw" data-v="30,4,Bike">🏍️ Bike<small>₹30 · 4 min</small></button><button class="sw" data-v="50,5,Auto, just you">🛺 Auto<small>₹50 · 5 min</small></button></div>
-            </div></div>
-            <div class="leg"><span class="b m"><i data-lucide="train-front"></i></span><div>
-              <div class="lt"><span>Yellow Line · 5 stops</span><span>₹32</span></div><div class="ld">Model Town → Rohini Sector 18-19 · 14 min<br>QR ticket in Hop, or tap your metro card</div>
-            </div></div>
-            <div class="leg"><span class="b"><i data-lucide="school"></i></span><div>
-              <div class="lt"><span>Rohini 18-19 → DTU</span><span id="l3p">₹20</span></div><div class="ld" id="l3d">Shared e-rickshaw · 9 min · 2.5 km</div>
-              <div class="swaps" data-leg="3"><button class="sw on" data-v="20,9,Shared e-rickshaw">🛺 Shared<small>₹20 · 9 min</small></button><button class="sw" data-v="35,6,Bike">🏍️ Bike<small>₹35 · 6 min</small></button><button class="sw" data-v="110,8,Cab, just you">🚗 Cab<small>₹110 · 8 min</small></button></div>
-            </div></div>
-          </div>
-          <div class="total"><div><div class="k">Door to door</div><div class="v" id="tt">36 min</div><div class="arrive"><i data-lucide="circle-check"></i><span id="ta">Reach DTU 8:48 · class at 9</span></div></div><div style="text-align:right"><div class="k">One payment</div><div class="v" id="tp">₹67</div></div></div>
-          <button class="cta" data-go="s3">Choose your seat</button>
+      <!-- 2 SWAP -->
+      <section class="view" id="s2" data-lt>
+        <div class="map" style="height:300px" data-map="swap"></div>
+        <div class="topbar"><button class="circle" data-go="s1"><i data-lucide="chevron-left"></i></button><div class="chip"><span class="dot"></span><span id="chipReach">Reach DTU 8:48 · class at 9</span></div></div>
+        <div class="sheet" style="top:270px">
+          <div class="grab"></div>
+          <div class="sum"><div><div class="small" style="font-weight:700">Door to door</div><div class="big" id="tt">36 min</div></div><div style="text-align:right"><div class="small" style="font-weight:700">One payment</div><div class="big" id="tp">₹67</div></div></div>
+          <div class="bar" id="bar"></div>
+          <div class="seg" id="seg"><button data-leg="0">First mile</button><button data-leg="1">Metro</button><button data-leg="2" class="on">Last mile</button></div>
+          <div class="legname" id="legname">Rohini Sector 18-19 metro → DTU campus · 2.5 km</div>
+          <div class="olist" id="opts"></div>
+          <div class="spacer"></div>
+          <button class="cta" data-go="s3"><span>Pick your seat</span><span id="ctap">₹67</span></button>
         </div>
       </section>
 
+      <!-- 3 SEAT E-RICKSHAW -->
       <section class="view" id="s3">
-        <div class="sheet full">
-          <div class="hd"><button class="back" data-go="s2"><i data-lucide="chevron-left"></i></button><div class="small">Step 2 of 3 · Your seat</div></div>
+        <div class="page">
+          <div class="hd"><button class="back" data-go="s2"><i data-lucide="chevron-left"></i></button><div class="s">Step 2 of 3 · Your seat</div></div>
           <div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
           <div class="h1">Pick your seat</div>
-          <div class="sub">E-rickshaw to DTU from Gate 3 · Ramesh · DL 1ER 4417</div>
-          <div class="veh">
-            <div class="seatrow"><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div></div>
-            <div class="seatrow"><button class="seat taken"><i data-lucide="user-round"></i>Taken</button><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button></div>
-            <div class="seatrow"><button class="seat" data-seat><i data-lucide="armchair"></i>Free</button><button class="seat taken"><i data-lucide="user-round"></i>Taken</button></div>
+          <div class="sub">Shared e-rickshaw · Rohini Sector 18-19 metro → DTU campus</div>
+          <div class="vehbox erick">
+            <div class="srow"><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div></div>
+            <div class="lbl">Facing forward</div>
+            <div class="srow"><button class="seat taken"><i data-lucide="user-round"></i>Taken</button><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button></div>
+            <div class="lbl">Facing back</div>
+            <div class="srow"><div class="seat pink"><span style="font-size:15px;font-weight:800;line-height:1">♀</span>Women</div><button class="seat" data-seat><i data-lucide="armchair"></i>Free</button></div>
           </div>
-          <div class="legend"><span><i style="background:var(--hop)"></i>Yours</span><span><i style="background:#e9e9ee"></i>Taken</span><span><i style="border:1.5px solid #000"></i>Free</span></div>
-          <div class="card" style="display:flex;gap:10px;align-items:center"><i data-lucide="users" style="font-size:18px;flex:0 0 auto"></i><span style="font-size:12.5px;font-weight:600">2 students on your metro booked this e-rickshaw too. It leaves as soon as the three of you reach Gate 3.</span></div>
-          <button class="cta" data-go="s4">Review and pay</button>
+          <div class="legend"><span><i style="background:var(--hop)"></i>Yours</span><span><i style="background:#e8e8ed"></i>Taken</span><span><i style="border:1.5px solid #111"></i>Free</span><span><i style="background:var(--pink2);border:1.5px solid var(--pink)"></i>Women only</span></div>
+          <div class="note pk"><i data-lucide="shield-check"></i>One seat in every shared ride is held for women, day and night.</div>
+          <div class="drvc"><span class="av">RK</span><div><b>Ramesh Kumar</b><span>★ 4.8 · 1,240 rides · verified</span></div><span class="plate">DL 1ER 4417</span></div>
+          <div class="spacer"></div>
+          <div class="small" style="text-align:center">2 students from your metro booked this ride. It leaves when you all reach Gate 3.</div>
+          <button class="cta" data-go="s4"><span>Review and pay</span><span id="ctap2">₹67</span></button>
         </div>
       </section>
 
+      <!-- 4 PAY -->
       <section class="view" id="s4">
-        <div class="sheet full">
-          <div class="hd"><button class="back" data-go="s3"><i data-lucide="chevron-left"></i></button><div class="small">Step 3 of 3 · Pay once</div></div>
+        <div class="page">
+          <div class="hd"><button class="back" data-go="s3"><i data-lucide="chevron-left"></i></button><div class="s">Step 3 of 3 · Pay once</div></div>
           <div class="stepper"><i class="on"></i><i class="on"></i><i class="on"></i></div>
           <div class="h1">One payment for the whole trip</div>
           <div class="sub">No cash, no recharge queue, no second app.</div>
-          <div class="rows">
-            <div class="rw"><span class="l">🛺<span>E-rickshaw to metro<small id="r1">Shared e-rickshaw · 6 min</small></span></span><b id="p1">₹15</b></div>
-            <div class="rw"><span class="l">🚇<span>Yellow Line metro<small>QR ticket · Model Town → Rohini 18-19</small></span></span><b>₹32</b></div>
-            <div class="rw"><span class="l">🛺<span>E-rickshaw to DTU<small id="r3">Shared · back seat, right</small></span></span><b id="p3">₹20</b></div>
+          <div class="receipt">
+            <div class="rrow"><span class="i" id="i1">🛺</span><div><b>PG → Model Town metro</b><span id="r1">Shared e-rickshaw · 6 min</span></div><span class="p" id="p1">₹15</span></div>
+            <div class="rrow"><span class="i">🚇</span><div><b>Yellow Line · 5 stops</b><span>Model Town → Rohini 18-19 · QR ticket</span></div><span class="p">₹32</span></div>
+            <div class="rrow"><span class="i" id="i3">🛺</span><div><b>Rohini 18-19 → DTU campus</b><span id="r3">Shared e-rickshaw · seat booked</span></div><span class="p" id="p3">₹20</span></div>
+            <div class="rtot"><span>Total · all fares included</span><b id="pt">₹67</b></div>
           </div>
-          <div class="total" style="margin-top:10px"><div><div class="k">Total</div><div class="small">All fares included</div></div><div class="v" id="pt">₹67</div></div>
-          <div class="payrow"><span><span class="upi">UPI</span>aarav@oksbi</span><span class="small">Change</span></div>
-          <button class="cta" data-go="s5" id="paybtn">Pay ₹67</button>
-          <div class="small" style="text-align:center;margin-top:8px">Bill in your email · trip shared with Mom</div>
+          <div class="pm"><span><span class="upi">UPI</span>aarav@oksbi</span><span class="small">Change</span></div>
+          <div class="chk"><div><i data-lucide="check"></i>Metro QR and both seats in one ticket</div><div><i data-lucide="check"></i>Bill in your email</div><div><i data-lucide="check"></i>Trip shared with Mom</div></div>
+          <div class="spacer"></div>
+          <button class="cta c" data-go="s5" id="paybtn">Pay ₹67</button>
         </div>
       </section>
 
-      <section class="view" id="s5" data-dark>
-        <div class="map" data-map="metro"></div>
+      <!-- 5 ON THE WAY -->
+      <section class="view" id="s5" data-lt>
+        <div class="map" style="bottom:0" data-map="metro"></div>
         <div class="topbar"><div class="chip"><span class="dot y"></span>Yellow Line · 2 stops to Rohini 18-19</div><div class="circle"><i data-lucide="share-2"></i></div></div>
         <div class="sheet">
           <div class="grab"></div>
-          <div style="display:flex;gap:12px;align-items:center"><div class="ok"><i data-lucide="check"></i></div><div><div class="h1" style="font-size:21px">Your seat is booked</div><div class="sub" style="margin-top:1px">It waits at Gate 3 and leaves when you get there.</div></div></div>
-          <div class="card"><div class="driver"><div class="av">RK</div><div><div class="nm">Ramesh Kumar</div><div class="mt">★ 4.8 · 1,240 rides · Verified</div></div><div class="plate">DL 1ER 4417</div></div></div>
+          <div style="display:flex;gap:12px;align-items:center"><div class="ok"><i data-lucide="check"></i></div><div><div class="h1" style="font-size:21px">Your seat is booked</div><div class="sub" style="margin-top:1px">Waiting at Gate 3. It leaves when you get there.</div></div></div>
+          <div class="drvc"><span class="av">RK</span><div><b>Ramesh Kumar</b><span>★ 4.8 · 1,240 rides · verified</span></div><span class="plate">DL 1ER 4417</span></div>
           <div class="steps"><span class="s done"><i></i>E-rickshaw</span><span class="ln"></span><span class="s now"><i></i>Metro</span><span class="ln"></span><span class="s"><i></i>Gate 3</span><span class="ln"></span><span class="s"><i></i>DTU 8:48</span></div>
           <div class="row2"><button class="ghost"><i data-lucide="qr-code"></i>Metro QR</button><button class="ghost"><i data-lucide="share-2"></i>Share trip</button><button class="ghost sos"><i data-lucide="siren"></i>SOS</button></div>
         </div>
       </section>
 
+      <!-- 6 INTERCITY OPTIONS -->
       <section class="view" id="s6">
-        <div class="sheet full">
-          <div class="small" style="font-weight:700;margin-bottom:6px">Tomorrow · Sameer · client meeting at 11:00 AM</div>
-          <div class="h1">Baner, Pune → BKC, Mumbai</div>
-          <div class="cmp">
-            <button class="cmpc sel" data-sel><div class="k">Hop Pool, 1 seat</div><div class="v">₹450</div><div class="d">Fixed price, tolls in<br>Reach 9:40 AM</div></button>
-            <button class="cmpc" data-sel><div class="k">Cab, just you</div><div class="v">₹3,200</div><div class="d">Estimate, tolls extra<br>Reach 9:20 AM</div></button>
+        <div class="page">
+          <div class="h1">Pune → Mumbai</div>
+          <div class="sub">Tomorrow, Mon 6 Oct</div>
+          <div class="route"><div class="r"><i></i>Baner, Pune</div><div class="r"><i class="sq"></i>BKC, Mumbai</div></div>
+          <div class="arr"><div>Arrive by<b>10:30 AM</b></div><div>Travellers<b>1 adult</b></div></div>
+          <div class="modes"><button class="on">All</button><button>Pool</button><button>Bus</button><button>Train</button><button>Flight</button><button>Cab</button></div>
+          <div class="ic-list">
+            <button class="ic sel" data-sel><span class="e">🚗</span><span><span class="t">Hop Pool <span class="tag g">On time</span></span><span class="d">6:15 → 9:40 · door to door · 3 h 25 m</span></span><span class="p">₹450<small>fixed</small></span></button>
+            <button class="ic" data-sel><span class="e">🚌</span><span><span class="t">E-Shivneri + Hop auto <span class="tag g">On time</span></span><span class="d">6:00 → 10:05 · Wakad → Dadar → BKC</span></span><span class="p">₹560<small>est.</small></span></button>
+            <button class="ic" data-sel><span class="e">🚆</span><span><span class="t">Deccan Queen + local <span class="tag r">Late</span></span><span class="d">7:15 → 11:05 · Pune Jn → CSMT → BKC</span></span><span class="p">₹185<small>est.</small></span></button>
+            <button class="ic" data-sel><span class="e">✈️</span><span><span class="t">Flight PNQ → BOM <span class="tag g">On time</span></span><span class="d">5:30 → 9:35 · incl. airport time</span></span><span class="p">₹4,800<small>est.</small></span></button>
+            <button class="ic" data-sel><span class="e">🚕</span><span><span class="t">Cab, just you <span class="tag g">On time</span></span><span class="d">6:30 → 9:50 · tolls extra</span></span><span class="p">₹3,200<small>est.</small></span></button>
           </div>
-          <div style="font-size:13px;font-weight:800;margin-top:14px">Pick a car</div>
-          <div class="cars">
-            <button class="carc sel" data-sel><span class="av">VS</span><span><div class="t">Vikram · Hyundai Creta</div><div class="d">6:15 AM · Wakad pickup · ★ 4.9 · 312 trips</div></span><span class="p">2 seats</span></button>
-            <button class="carc" data-sel><span class="av">NJ</span><span><div class="t">Neha · Maruti Ciaz</div><div class="d">6:40 AM · Baner pickup · ★ 4.8 · 128 trips</div></span><span class="p">1 seat</span></button>
-            <button class="carc" data-sel><span class="av">AR</span><span><div class="t">Arjun · Toyota Innova</div><div class="d">7:00 AM · Aundh · ★ 4.7 · 6-seater</div></span><span class="p">3 seats</span></button>
-          </div>
-          <div class="list"><div class="li"><i data-lucide="radar"></i>Live arrival time, the whole way</div><div class="li"><i data-lucide="refresh-ccw"></i>Driver cancels? Next car, same price</div></div>
-          <button class="cta" data-go="s7">Choose a seat in the Creta</button>
+          <div class="spacer"></div>
+          <button class="cta" data-go="s7"><span>Pick a car in Hop Pool</span><span>₹450</span></button>
         </div>
       </section>
 
+      <!-- 7 PICK CAR -->
       <section class="view" id="s7">
-        <div class="sheet full">
-          <div class="hd"><button class="back" data-go="s6"><i data-lucide="chevron-left"></i></button><div class="small">Vikram's Creta · MH 12 TV 2208</div></div>
+        <div class="page">
+          <div class="hd"><button class="back" data-go="s6"><i data-lucide="chevron-left"></i></button><div class="s">Hop Pool · Baner → BKC · Mon 6 Oct</div></div>
+          <div class="h1">Pick a car</div>
+          <div class="sub">Fixed ₹450 a seat, tolls included. Verified drivers on this route.</div>
+          <div class="cars">
+            <button class="ic sel" data-sel><span class="av">VS</span><span><span class="t">Vikram · Hyundai Creta</span><span class="d">Leaves 6:15 · Wakad pickup · ★ 4.9 · 312 trips</span></span><span class="p">2<small>seats left</small></span></button>
+            <button class="ic" data-sel><span class="av">NJ</span><span><span class="t">Neha · Maruti Ciaz</span><span class="d">Leaves 6:40 · Baner pickup · ★ 4.8 · women only</span></span><span class="p">1<small>seat left</small></span></button>
+            <button class="ic" data-sel><span class="av">AR</span><span><span class="t">Arjun · Toyota Innova</span><span class="d">Leaves 7:00 · Aundh pickup · ★ 4.7 · 6-seater</span></span><span class="p">3<small>seats left</small></span></button>
+          </div>
+          <div style="margin-top:12px"><div class="li"><i data-lucide="radar"></i>Live arrival time, the whole way</div><div class="li"><i data-lucide="refresh-ccw"></i>Driver cancels? Next car, same price</div><div class="li"><i data-lucide="receipt-text"></i>GST invoice for your office claim</div></div>
+          <div class="spacer"></div>
+          <button class="cta" data-go="s8"><span>Pick a seat in the Creta</span><span>₹450</span></button>
+        </div>
+      </section>
+
+      <!-- 8 CAR SEAT -->
+      <section class="view" id="s8">
+        <div class="page">
+          <div class="hd"><button class="back" data-go="s7"><i data-lucide="chevron-left"></i></button><div class="s">Vikram's Creta · MH 12 TV 2208</div></div>
           <div class="h1">Pick your seat</div>
           <div class="sub">3 riders max, so the middle seat stays empty.</div>
-          <div class="veh car">
-            <div class="seatrow"><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div><button class="seat taken"><i data-lucide="user-round"></i>Taken</button></div>
-            <div class="seatrow"><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button><div class="seat off">Empty</div><button class="seat" data-seat><i data-lucide="armchair"></i>Free</button></div>
+          <div class="vehbox car">
+            <div class="lbl">Front</div>
+            <div class="srow"><button class="seat taken"><i data-lucide="user-round"></i>Taken</button><div class="seat ghost"></div><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div></div>
+            <div class="lbl" style="margin-top:12px">Back</div>
+            <div class="srow"><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button><div class="seat off">Empty</div><div class="seat pink"><span style="font-size:15px;font-weight:800;line-height:1">♀</span>Women</div></div>
           </div>
-          <div class="list" style="margin-top:6px">
-            <div class="li"><i data-lucide="receipt-text"></i>GST invoice for your office claim</div>
-            <div class="li"><i data-lucide="credit-card"></i>UPI, card or company wallet</div>
-            <div class="li"><i data-lucide="headset"></i>24×7 support, a real person</div>
-            <div class="li"><i data-lucide="clock-3"></i>Reach 9:40 AM, 80 min before your meeting</div>
-          </div>
-          <button class="cta">Reserve seat · ₹450</button>
+          <div class="legend"><span><i style="background:var(--hop)"></i>Yours</span><span><i style="background:#e8e8ed"></i>Taken</span><span><i style="background:var(--pink2);border:1.5px solid var(--pink)"></i>Women only</span></div>
+          <div style="margin-top:10px"><div class="li"><i data-lucide="credit-card"></i>UPI, card or company wallet</div><div class="li"><i data-lucide="headset"></i>24×7 support, a real person</div><div class="li"><i data-lucide="clock-3"></i>Reach BKC 9:40 AM</div></div>
+          <div class="spacer"></div>
+          <button class="cta"><span>Reserve seat</span><span>₹450</span></button>
         </div>
       </section>
 
-      <section class="view" id="s8" data-dark>
-        <div class="map" data-map="mumbai"></div>
+      <!-- 9 NEWCOMER: LOCAL TRAIN -->
+      <section class="view" id="s9" data-lt>
+        <div class="map" style="height:330px" data-map="mumbai"></div>
         <div class="topbar"><div class="chip"><span class="dot"></span>New to Mumbai? We'll guide you</div><div class="circle"><i data-lucide="user-round"></i></div></div>
-        <div class="sheet">
+        <div class="sheet" style="top:300px">
           <div class="grab"></div>
-          <div class="h1">Kurla station → BKC</div>
+          <div class="h1">Thane → BKC</div>
           <div class="sub">Cheapest first · Karan</div>
-          <div class="opts">
-            <button class="opt sel" data-sel><span class="ico">🚌</span><span><span class="t">BEST bus <span class="tag">Live</span></span><span class="d">3 stops away · 6 min · ticket inside</span></span><span class="p">₹10</span></button>
-            <button class="opt" data-sel><span class="ico">🛺</span><span><span class="t">Shared auto</span><span class="d">3 of 4 seats taken · leaves in 2 min</span></span><span class="p">₹25</span></button>
-            <button class="opt" data-sel><span class="ico">🚗</span><span><span class="t">Cab, just you</span><span class="d">4 min away</span></span><span class="p">₹180<small>est.</small></span></button>
+          <div class="olist">
+            <button class="orow sel" data-sel><span class="veh">🚆</span><span><span class="t">Local + BEST bus <span class="tag">Cheapest</span></span><span class="d">8:24 fast local, platform 2 · bus at Kurla (W)</span></span><span class="p">₹20<small>58 min</small></span></button>
+            <button class="orow" data-sel><span class="veh">🛺</span><span><span class="t">Local + shared auto</span><span class="d">Shared auto from Kurla (W), 3 of 4 seats taken</span></span><span class="p">₹35<small>52 min</small></span></button>
+            <button class="orow" data-sel><span class="veh">🚕</span><span><span class="t">Cab, just you</span><span class="d">Eastern Express Highway traffic</span></span><span class="p">₹650<small>75 min</small></span></button>
           </div>
-          <div class="card" style="display:flex;gap:12px;align-items:center;margin-top:12px"><div class="qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATYAAAE2AQAAAADDx4MEAAACVklEQVR4nO1aUWrDMAyV7MA+E9gBehT3ZrtafJQeYJB+Fhw0JNlJNzroT53ElT5MTASt/fIsPVlI8IzN7ik3APN7bM/uC9C4PLEB9OuQyqs+2T4/thfsSy9AyN7PCOHSgQwClLziJ8Pjsb1iX2ZEHHhy7YQLAHFgZCYAiIj4qt99xtyb+XV/5hTRJ4kpCP339v/PvbkfftENhRVrYKnxu/+Ze0N+eObDDBDPnqOIJzmhEHoACHSMdbh2/K7IJqGDqTHMSGOfNJ7LKzwfYh1N+AH9tkIXTzRq4qXZ197X4RrxA9l2yaVoZCgCJSjpr0wNj9r8SEA0+SxCgjwJPMaP7fhBKQMgKnDsMzIqQoKdVxXxgHws6Vz5wcYvlD2j1Utq1ktui+CQKH5DybmycMcPOkIcdI34wX1WtZ5XUIYcSSy/qqg/OgaFWSH1RA4Y2TxBPBGZ/qiJR+RSYhyy6kA8FbqEaRahLiTZO89dI34gJ5JWdTXJkijOQV3zXcuvtsAjLFdR63kVOHQwMpbv1tUfSfdetbiWrvqc75ZAb/G8rj4fl4KVwAOlcpJFoenBuvyg+9yW+NBieNRBgDJ+bFDfHXmu9cSJH5UuWk3Ze17imvGLeseBWIomXlWHypE8HGAd7fWXRO5ikCrJeSlssVl/Sd372rkD6V0IF6lVeb2v5SKWenBnwwG+q+b84rBSAzSS6BkWTJ9v0e8TpgEIrp8pc0baf4bvjoc9fC/v4AflGjBfEqrgYCupleVXW/WXxFMO6iRQ6CWI3oTs/rtyjfih9bc/tK3w+AGNX8SFWuGKqQAAAABJRU5ErkJggg==" alt="Bus ticket QR"></div><div><div style="font-weight:800;font-size:14px">Bus ticket · ₹10</div><div class="small">Show it to the conductor. We'll ping you 2 min before the bus arrives.</div></div></div>
+          <div class="qrcard"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYYAAAGGAQAAAABX+xtIAAADTklEQVR4nO1cbYrjMAx9cgLzM73BHCW9wR5p2CPtDZKjzAEWkp8DDVokWYlbWEiWZUhdvR8hcSs6zrNkfXmIcQxLOigAhMS53hV42O46FtyA3i7MgIwN3c2/1N2Cwf1Ip5RogW6Sm6UF5vZGcs/j5bdeWsYsIx1g9mD8cdJ5pJA49K4WIrrIQ/dF6CeAPqaGZQkA47ur+EikCyLe7n6kU0q0xX0/gQkdA+NlApkBmN+Y+mH53r8qhcQ3vavxshBGakHXmcg2+n5a6H/+xj6knd/bEBLH3lXDzKLSvVh0se2Z7k81AmLl9VFduni7tfntt79fMsJvr4HzEhKhqZ5rhKYGQMY0YMuIWK0CzofObLajCMjVrKu9b3ws9LwGzgW2WWdqdSQTr3ruF5YUTeh5BZwPumPDfThz6ZRkXwKWlvMvn3MeKST2g41uVexC7Vft1nVgGq8Izp9+JSKHaXdZ9nXvLq0AsgE45zxSSOwHr8ib+mrWfQMvrTzCtj//SoTpdN6xhVo8ZGdWlx26QELPq+Cc+V6T3Zh7kO4BG4LzWjjHll11V820e/Pg1z2+Dz1/fs5T4ZSbdksFVauq8oEWWemqY4Lxct55HER6ZYmZpH4u5bO5BdH7F9GHlldmsnK6sq+QZXHaeRxEelkJeDNU7oOyZJzH4razuwfPauDPOY8UEvvBFpd5BdUTb56i2bz6Pnw41CGBTLKnXbcaizl36tflMkwTOZlKOOetSWK6u+gubtqtj7YiwrZXwPlgWRdXdqN7DcgLFZ8snDvnPFJI7AcXVRQvk2fPzT4ozDpCz2tYifDsW6b2Ifvm2s25sB5+ex2cI7tqW9p1q6sVxTUOPUdVNRbcuey5Y8bbopx4Dr+9Ls6xRureIGXavXr1yPbgnPNIIfEv9XPeqmlrs0zRIzdEbxTqPJeKbMzXJXDfMoeIzys7l4qlZUC0+xeB0cm5VEOjbrxsAnH+vK5zqWg4101V4z+lzKanUaX0doWcZotaah2cr5Di6XgB+KeWVt3A04fH508yj11ILyuBosf1vrnZ8zSKxtM2sZ/XdS4V85uQvBAP1hiTld3GeDr7PI4hvawEHt3z7aBiWVhv1pJLxOdPzznF/43ajXMyeFziD79CGJEr0RkVAAAAAElFTkSuQmCC" alt="Trip ticket QR"><div><b>One ticket · ₹20</b><div class="lg">Thane → Kurla · local, 2nd class<br>Kurla (W) → BKC · BEST bus<br>Pinged 2 min before each arrives</div></div></div>
         </div>
       </section>
 
-      <section class="view" id="s9" data-dark>
-        <div class="map" data-map="coaching"></div>
+      <!-- 10 PARENT -->
+      <section class="view" id="s10" data-lt>
+        <div class="map" style="bottom:0" data-map="coaching"></div>
         <div class="toast"><div class="ap">hop</div><div><b>Riya reached Punjabi Bagh</b><span>Dropped at the coaching centre gate · 5:58 PM</span></div></div>
         <div class="sheet">
           <div class="grab"></div>
           <div class="h1">Riya's ride home</div>
           <div class="sub">Shared e-rickshaw · 2 other students · leaves 7:30 PM</div>
-          <div class="card"><div class="driver"><div class="av">SY</div><div><div class="nm">Suresh Yadav</div><div class="mt">Police-verified · ★ 4.9 · coaching routes</div></div><div class="plate">DL 1ER 9032</div></div></div>
-          <div class="list"><div class="li"><i data-lucide="map-pin"></i>Live location until she's home</div><div class="li"><i data-lucide="shield-check"></i>Same driver, same route, every day</div><div class="li"><i data-lucide="bell"></i>Alert if the route changes</div></div>
+          <div class="drvc"><span class="av">SY</span><div><b>Suresh Yadav</b><span>Police-verified · ★ 4.9 · coaching routes</span></div><span class="plate">DL 1ER 9032</span></div>
+          <div style="margin-top:8px"><div class="li"><i data-lucide="map-pin"></i>Live location until she's home</div><div class="li"><i data-lucide="shield-check"></i>Same driver, same route, every day</div><div class="li"><i data-lucide="bell"></i>Alert if the route changes</div></div>
         </div>
       </section>
     </div></div>
   </main>
 </div>
 <script>
-const SCREENS=[['Aarav · DTU student, Delhi'],
-  ['s1','Plan the trip','Model Town → DTU, 3 ways'],['s2','Swap any leg','E-rickshaw, bike or cab'],['s3','Pick your seat','In the e-rickshaw'],['s4','Pay once','The whole trip, one UPI'],['s5','On the way','Seat waits at Gate 3'],
-  ['Sameer · Pune → Mumbai'],['s6','Pool vs solo cab','Then pick a car'],['s7','Pick a seat','Invoice for office'],
-  ['Karan · new to Mumbai'],['s8','Cheapest way','Live bus, ticket inside'],
-  ['A parent'],['s9','Coaching ride home','Tracked until home']];
-const nav=document.getElementById('nav');let n=0;
-nav.innerHTML=SCREENS.map(s=>s.length===1?`<div class="chap">${s[0]}</div>`:`<button data-go="${s[0]}"><span class="n">${++n}</span><span>${s[1]}<br><span style="color:#6e6e76;font-size:12px">${s[2]}</span></span></button>`).join('');
+const CH=[
+ {name:'Aarav',meta:'DTU student · metro + e-rickshaw',col:'#00c46a',ic:'graduation-cap',steps:[['s1','Plan the trip'],['s2','Swap any leg'],['s3','Pick your seat'],['s4','Pay once'],['s5','On the way']]},
+ {name:'Sameer',meta:'Pune → Mumbai daily',col:'#a78bfa',ic:'briefcase',steps:[['s6','Compare every option'],['s7','Pick a car'],['s8','Pick a seat']]},
+ {name:'Karan',meta:'New to Mumbai',col:'#6ea8ff',ic:'map-pinned',steps:[['s9','Local train + bus, one ticket']]},
+ {name:'A parent',meta:'Coaching ride home',col:'#ffcc00',ic:'house',steps:[['s10','Tracked until home']]}];
+const nav=document.getElementById('nav');let k=0;
+nav.innerHTML=CH.map((c,ci)=>`<div class="acc" data-ch="${ci}"><button class="acc-h" data-open="${ci}"><span class="av" style="background:${c.col}"><i data-lucide="${c.ic}"></i></span><span><b>${c.name}</b><small>${c.meta}</small></span><i data-lucide="chevron-right" class="chev"></i></button><div class="acc-b">${c.steps.map(s=>`<button data-go="${s[0]}"><span class="n">${++k}</span>${s[1]}</button>`).join('')}</div></div>`).join('');
+/* maps */
 function streets(seed){let s=seed,r=()=>{s=(s*9301+49297)%233280;return s/233280};let p='';
-  for(let i=0;i<14;i++){const y=r()*900;p+=`<path d="M-20 ${y} C 120 ${y+r()*80-40}, 260 ${y+r()*80-40}, 420 ${y+r()*60-30}" stroke="#202024" stroke-width="${r()<.3?9:4}" fill="none"/>`}
-  for(let i=0;i<10;i++){const x=r()*390;p+=`<path d="M${x} -20 C ${x+r()*60-30} 300, ${x+r()*60-30} 600, ${x+r()*40-20} 900" stroke="#1c1c20" stroke-width="${r()<.3?8:3.5}" fill="none"/>`}return p}
+  for(let i=0;i<14;i++){const y=r()*900;p+=`<path d="M-20 ${y} C 120 ${y+r()*80-40}, 260 ${y+r()*80-40}, 420 ${y+r()*60-30}" stroke="#1f1f23" stroke-width="${r()<.3?9:4}" fill="none"/>`}
+  for(let i=0;i<10;i++){const x=r()*390;p+=`<path d="M${x} -20 C ${x+r()*60-30} 300, ${x+r()*60-30} 600, ${x+r()*40-20} 900" stroke="#1b1b1f" stroke-width="${r()<.3?8:3.5}" fill="none"/>`}return p}
 const T=(x,y,t,c='#d4d4d8')=>`<text x="${x}" y="${y}" fill="${c}" font-size="12.5" font-family="Inter" font-weight="700">${t}</text>`;
+const mover=(path,emo,dur)=>`<g><circle r="17" fill="#fff"/><text x="-10" y="7" font-size="19">${emo}</text><animateMotion dur="${dur}s" repeatCount="indefinite" path="${path}"/></g>`;
+const P1='M60 330 L 110 290',P2='M110 290 L 290 170',P3='M290 170 L 340 115';
 const MAPS={
- plan:`${streets(5)}<path d="M60 330 L 110 290" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><path d="M110 290 L 290 170" stroke="#ffcc00" stroke-width="7" stroke-linecap="round"/><path d="M290 170 L 340 115" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="60" cy="330" r="9" fill="#fff"/><circle cx="110" cy="290" r="8" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="290" cy="170" r="8" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="340" cy="115" r="10" fill="#00c46a"/>${T(30,356,'PG')}${T(126,304,'Model Town')}${T(186,186,'Rohini 18-19','#ffe48a')}${T(300,148,'DTU','#6fd39e')}`,
- metro:`${streets(7)}<path d="M-10 250 L 160 300 L 230 330 L 420 380" stroke="#ffcc00" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="160" cy="300" r="10" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><path d="M160 300 C 200 250, 250 220, 300 165" stroke="#00c46a" stroke-width="5" fill="none" stroke-dasharray="2 10" stroke-linecap="round"/><circle cx="300" cy="165" r="9" fill="#00c46a"/>${T(174,322,'Rohini 18-19','#9a9aa2')}${T(262,150,'DTU','#6fd39e')}`,
- mumbai:`${streets(23)}<path d="M40 330 C 120 280, 200 260, 330 150" stroke="#3d7bff" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="40" cy="330" r="10" fill="#fff"/><circle cx="330" cy="150" r="10" fill="#3d7bff"/><rect x="150" y="248" width="34" height="26" rx="7" fill="#00c46a"/><text x="158" y="266" font-size="14">🚌</text>${T(56,354,'Kurla (W)')}${T(276,136,'BKC','#9fbcff')}`,
- coaching:`${streets(53)}<path d="M80 380 C 150 330, 220 290, 300 190" stroke="#00c46a" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="300" cy="190" r="10" fill="#fff"/><circle cx="80" cy="380" r="13" fill="#00c46a" stroke="#0b0c0e" stroke-width="4"/>`};
-document.querySelectorAll('[data-map]').forEach(m=>m.innerHTML=`<svg viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice"><rect width="390" height="844" fill="#0b0c0e"/>${MAPS[m.dataset.map]}</svg>`);
-const legs={1:[15,6,'Shared e-rickshaw'],3:[20,9,'Shared e-rickshaw']};
-function recalc(){const p=legs[1][0]+legs[3][0]+32, m=legs[1][1]+legs[3][1]+21, end=8*60+12+m;
-  const t=`${Math.floor(end/60)}:${String(end%60).padStart(2,'0')}`;
-  const set=(id,v)=>document.getElementById(id).textContent=v;
-  set('tt',m+' min');set('tp','₹'+p);set('ta',`Reach DTU ${t} · class at 9`);
-  set('l1p','₹'+legs[1][0]);set('l3p','₹'+legs[3][0]);
-  set('l1d',`${legs[1][2]} · ${legs[1][1]} min · 1.5 km`);set('l3d',`${legs[3][2]} · ${legs[3][1]} min · 2.5 km`);
-  set('p1','₹'+legs[1][0]);set('p3','₹'+legs[3][0]);set('r1',`${legs[1][2]} · ${legs[1][1]} min`);
-  set('pt','₹'+p);set('paybtn','Pay ₹'+p);}
+ plan:`${streets(5)}<path d="${P1}" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><path d="${P2}" stroke="#ffcc00" stroke-width="7" stroke-linecap="round"/><path d="${P3}" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="60" cy="330" r="9" fill="#fff"/><circle cx="110" cy="290" r="8" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="290" cy="170" r="8" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="340" cy="115" r="10" fill="#00c46a"/>${T(30,356,'PG')}${T(126,304,'Model Town')}${T(186,186,'Rohini 18-19','#ffe48a')}${T(300,148,'DTU','#6fd39e')}${mover(P2,'🚇',7)}`,
+ swap:`${streets(9)}<path d="M40 250 L 100 215" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><path d="M100 215 L 270 135" stroke="#ffcc00" stroke-width="7" stroke-linecap="round"/><path id="lastleg" d="M270 135 C 300 120, 320 110, 350 95" stroke="#00c46a" stroke-width="6" stroke-linecap="round" fill="none"/><circle cx="40" cy="250" r="8" fill="#fff"/><circle cx="100" cy="215" r="7" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="270" cy="135" r="7" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="350" cy="95" r="9" fill="#00c46a"/>${T(286,166,'Rohini 18-19','#ffe48a')}${T(318,82,'DTU','#6fd39e')}<g id="mv"><circle r="18" fill="#fff"/><text id="mvE" x="-11" y="7" font-size="20">🛺</text><animateMotion dur="3.2s" repeatCount="indefinite" path="M270 135 C 300 120, 320 110, 350 95"/></g>`,
+ metro:`${streets(7)}<path d="M-10 250 L 160 300 L 230 330 L 420 380" stroke="#ffcc00" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="160" cy="300" r="10" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><path d="M160 300 C 200 250, 250 220, 300 165" stroke="#00c46a" stroke-width="5" fill="none" stroke-dasharray="2 10" stroke-linecap="round"/><circle cx="300" cy="165" r="9" fill="#00c46a"/>${T(174,322,'Rohini 18-19','#9a9aa2')}${T(262,150,'DTU','#6fd39e')}${mover('M-10 250 L 160 300','🚇',4)}`,
+ mumbai:`${streets(23)}<path d="M40 300 L 190 205" stroke="#ff5a5f" stroke-width="7" stroke-linecap="round"/><path d="M190 205 C 240 180, 290 160, 335 120" stroke="#3d7bff" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="40" cy="300" r="9" fill="#fff"/><circle cx="190" cy="205" r="8" fill="#0b0c0e" stroke="#ff5a5f" stroke-width="4"/><circle cx="335" cy="120" r="10" fill="#3d7bff"/>${T(56,324,'Thane')}${T(150,236,'Kurla','#ffb3b5')}${T(300,104,'BKC','#9fbcff')}${mover('M40 300 L 190 205','🚆',5)}`,
+ coaching:`${streets(53)}<path d="M80 380 C 150 330, 220 290, 300 190" stroke="#00c46a" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="300" cy="190" r="10" fill="#fff"/>${mover('M80 380 C 150 330, 220 290, 300 190','🛺',6)}`};
+document.querySelectorAll('[data-map]').forEach(m=>m.innerHTML=`<svg viewBox="0 0 390 ${m.style.height?parseInt(m.style.height):844}" preserveAspectRatio="xMidYMin slice"><rect width="390" height="844" fill="#0b0c0e"/>${MAPS[m.dataset.map]}</svg>`);
+/* swap model */
+const LEGS=[
+ {name:'PG → Model Town metro · 1.5 km',opts:[['🛺','Shared e-rickshaw','Seat waits at your gate',15,6],['🏍️','Bike','2 min away',30,4],['🛺','Auto, just you','Ready at your gate',50,5]],sel:0},
+ {name:'Yellow Line · Model Town → Rohini Sector 18-19',opts:[['🚇','Metro, 5 stops','QR ticket in Hop, or tap your card',32,14]],sel:0},
+ {name:'Rohini Sector 18-19 metro → DTU campus · 2.5 km',opts:[['🛺','Shared e-rickshaw','Leaves when you reach Gate 3',20,9],['🏍️','Bike','Waiting at Gate 3',35,6],['🚕','Cab, just you','4 min away',110,8]],sel:0}];
+let cur=2;
+const WALK=7;
+function total(){let p=0,m=WALK;LEGS.forEach(l=>{const o=l.opts[l.sel];p+=o[3];m+=o[4]});return[p,m]}
+function render(){const [p,m]=total(),end=8*60+12+m,t=`${Math.floor(end/60)}:${String(end%60).padStart(2,'0')}`;
+  const $=id=>document.getElementById(id);
+  $('tt').textContent=m+' min';$('tp').textContent='₹'+p;$('ctap').textContent='₹'+p;$('ctap2').textContent='₹'+p;$('chipReach').textContent=`Reach DTU ${t} · class at 9`;
+  $('bar').innerHTML=LEGS.map((l,i)=>{const o=l.opts[l.sel];return `<div class="${i==1?'x':'s'}" style="flex:${o[4]}">${o[0]} ${o[4]}m</div>`}).join('')+`<div class="w" style="flex:${WALK}">🚶 ${WALK}m</div>`;
+  $('seg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.leg===cur));
+  $('legname').textContent=LEGS[cur].name;
+  $('opts').innerHTML=LEGS[cur].opts.map((o,i)=>`<button class="orow ${i==LEGS[cur].sel?'sel':''}" data-opt="${i}"><span class="veh">${o[0]}</span><span><span class="t">${o[1]}${i==0&&cur!=1?' <span class="tag">Cheapest</span>':''}</span><span class="d">${o[2]} · ${o[4]} min</span></span><span class="p">₹${o[3]}</span></button>`).join('');
+  const e=document.getElementById('mvE');if(e)e.textContent=LEGS[2].opts[LEGS[2].sel][0];
+  const a=LEGS[0].opts[LEGS[0].sel],c=LEGS[2].opts[LEGS[2].sel];
+  $('i1').textContent=a[0];$('r1').textContent=`${a[1]} · ${a[4]} min`;$('p1').textContent='₹'+a[3];
+  $('i3').textContent=c[0];$('r3').textContent=`${c[1]} · ${c[4]} min`;$('p3').textContent='₹'+c[3];
+  $('pt').textContent='₹'+p;$('paybtn').textContent='Pay ₹'+p;}
+function openCh(ci){document.querySelectorAll('.acc').forEach(a=>a.classList.toggle('open',+a.dataset.ch===ci))}
 function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===id));
-  const v=document.getElementById(id);document.getElementById('status').classList.toggle('dk',!v.hasAttribute('data-dark'));
-  nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));history.replaceState(null,'',location.search+'#'+id);}
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
-  const sw=e.target.closest('.sw');if(sw){const box=sw.parentElement;box.querySelectorAll('.sw').forEach(x=>x.classList.remove('on'));sw.classList.add('on');
-    const [p,m,l]=sw.dataset.v.split(',');legs[box.dataset.leg]=[+p,+m,l];recalc();return}
-  const st=e.target.closest('[data-seat]');if(st){st.closest('.veh').querySelectorAll('[data-seat]').forEach(x=>{x.classList.remove('mine');x.innerHTML='<i data-lucide="armchair"></i>Free'});st.classList.add('mine');st.innerHTML='<i data-lucide="check"></i>Yours';lucide.createIcons();return}
+  const v=document.getElementById(id);document.getElementById('status').classList.toggle('lt',v.hasAttribute('data-lt'));
+  document.querySelectorAll('.acc-b button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
+  const ci=CH.findIndex(c=>c.steps.some(s=>s[0]===id));openCh(ci);history.replaceState(null,'',location.search+'#'+id);}
+document.addEventListener('click',e=>{
+  const oc=e.target.closest('[data-open]');if(oc){const ci=+oc.dataset.open;go(CH[ci].steps[0][0]);return}
+  const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
+  const sg=e.target.closest('#seg button');if(sg){cur=+sg.dataset.leg;render();return}
+  const op=e.target.closest('[data-opt]');if(op){LEGS[cur].sel=+op.dataset.opt;render();return}
+  const st=e.target.closest('[data-seat]');if(st){st.closest('.vehbox').querySelectorAll('[data-seat]').forEach(x=>{x.classList.remove('mine');x.innerHTML='<i data-lucide="armchair"></i>Free'});st.classList.add('mine');st.innerHTML='<i data-lucide="check"></i>Yours';lucide.createIcons();return}
   const o=e.target.closest('[data-sel]');if(o){o.parentElement.querySelectorAll('[data-sel]').forEach(x=>x.classList.remove('sel'));o.classList.add('sel')}});
-const ids=SCREENS.filter(s=>s.length>1).map(s=>s[0]);
-document.addEventListener('keydown',e=>{const cur=ids.indexOf((document.querySelector('.view.on')||{}).id);
-  if(e.key==='ArrowRight')go(ids[Math.min(ids.length-1,cur+1)]);if(e.key==='ArrowLeft')go(ids[Math.max(0,cur-1)]);});
+const ids=CH.flatMap(c=>c.steps.map(s=>s[0]));
+document.addEventListener('keydown',e=>{const i=ids.indexOf((document.querySelector('.view.on')||{}).id);
+  if(e.key==='ArrowRight')go(ids[Math.min(ids.length-1,i+1)]);if(e.key==='ArrowLeft')go(ids[Math.max(0,i-1)]);});
 if(new URLSearchParams(location.search).has('shot')){document.body.classList.add('shot');document.documentElement.classList.add('shot')}
 function fit(){const ph=document.getElementById('phone');if(document.body.classList.contains('shot')||innerWidth<860){ph.style.transform='';return}
   const sc=Math.min(1,(innerHeight-40)/868);ph.style.transform=sc<1?`scale(${sc})`:'';}
 addEventListener('resize',fit);fit();
 window.go=go;addEventListener('hashchange',()=>go((location.hash||'#s1').slice(1)));
-go((location.hash||'#s1').slice(1));recalc();lucide.createIcons();
+render();go((location.hash||'#s1').slice(1));lucide.createIcons();
 </script>
 </body>
 </html>
