@@ -155,6 +155,32 @@ button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
 .toast b{font-size:14px}.toast span{display:block;font-size:12px;color:#a1a1aa}
 .li{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;padding:6px 0}
 .li svg{font-size:16px;color:var(--hopd);flex:0 0 auto}
+.drvc>.av{display:flex!important;color:#fff!important;font-size:14px!important}
+.drvc>div span{display:block}
+.rch{display:block;color:var(--hopd);font-size:12px;font-weight:800;margin-top:1px}
+.reachpill{display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:800;color:var(--hopd);background:#e8f8ef;border-radius:20px;padding:5px 11px;margin-top:8px}
+.vehwrap{position:relative;margin:8px auto 2px;width:220px}
+.vehwrap svg{display:block;width:220px}
+.vehwrap .seat{position:absolute;width:52px;height:46px;border-radius:12px;font-size:10px}
+.vehwrap .ff{position:absolute;left:0;right:0;text-align:center;font-size:10px;font-weight:800;color:var(--m);letter-spacing:.06em;text-transform:uppercase}
+.page>*{flex-shrink:0}.page>.spacer{flex:1 1 auto;flex-shrink:1}
+.r2{display:flex;justify-content:space-between;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin-top:10px;font-size:13.5px;font-weight:700}
+.r2 small{display:block;color:var(--m);font-weight:600;font-size:11.5px}
+.sortrow{display:flex;gap:6px;align-items:center;margin-top:10px}
+.sortrow>span{font-size:12px;font-weight:700;color:var(--m);margin-right:2px}
+.sortrow button,.modes2 button{flex:0 0 auto;padding:6px 11px;border-radius:18px;background:var(--g);font-size:12px;font-weight:700;color:#000;white-space:nowrap}
+.sortrow button.on,.modes2 button.on{background:#000;color:#fff}
+.modes2{display:flex;gap:6px;margin-top:8px;overflow-x:auto;scrollbar-width:none}
+.ilist{display:flex;flex-direction:column;gap:6px;margin-top:10px;overflow:auto;scrollbar-width:none;flex-shrink:1!important;min-height:0}
+.ic2{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:9px 11px;border-radius:15px;border:2px solid transparent;box-shadow:0 0 0 1px var(--line) inset;text-align:left;color:#000;width:100%;background:#fff}
+.ic2.sel{box-shadow:none;border-color:#000}
+.ic2 .e{width:40px;height:40px;border-radius:11px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:20px}
+.ic2 .t{font-weight:800;font-size:13.5px;display:flex;gap:5px;align-items:center}
+.ic2 .lg{font-size:11.5px;color:var(--m);margin-top:2px;line-height:1.35}
+.ic2 .rt{text-align:right;white-space:nowrap}
+.ic2 .rt b{display:block;font-size:16px;letter-spacing:-.01em}
+.ic2 .rt .rv{font-size:11.5px;font-weight:800;color:var(--hopd)}
+.ic2 .rt .rv.late{color:var(--red)}
 @media (max-width:860px){.viewer{grid-template-columns:1fr}.side{border-right:0;padding:24px;height:auto}.stage{height:auto;padding:10px 0 40px}}
 html.shot,body.shot{background:transparent}body.shot .side{display:none}body.shot .viewer{grid-template-columns:1fr}body.shot .stage{padding:0;height:auto}body.shot .phone{box-shadow:none}
 </style>
@@ -181,9 +207,9 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
           <div class="h1">Model Town → DTU</div>
           <div class="sub">3 ways to go. One payment, whichever you pick.</div>
           <div class="olist">
-            <button class="orow sel" data-sel><span class="veh">🛺</span><span><span class="t">Shared all the way <span class="tag">Cheapest</span></span><span class="d">E-rickshaw · metro · e-rickshaw · reach 8:48</span></span><span class="p">₹67<small>36 min</small></span></button>
-            <button class="orow" data-sel><span class="veh">🏍️</span><span><span class="t">Bike to and from metro</span><span class="d">Bike · metro · bike · reach 8:43</span></span><span class="p">₹97<small>31 min</small></span></button>
-            <button class="orow" data-sel><span class="veh">🚕</span><span><span class="t">Cab, just you</span><span class="d">Door to door · Outer Ring Road traffic</span></span><span class="p">₹380<small>44 min</small></span></button>
+            <button class="orow sel" data-sel><span class="veh">🛺</span><span><span class="t">Shared all the way <span class="tag">Cheapest</span></span><span class="d">E-rickshaw · metro · e-rickshaw · 36 min</span></span><span class="p">₹67<span class="rch">Reach 8:48</span></span></button>
+            <button class="orow" data-sel><span class="veh">🏍️</span><span><span class="t">Bike to and from metro</span><span class="d">Bike · metro · bike · 31 min</span></span><span class="p">₹97<span class="rch">Reach 8:43</span></span></button>
+            <button class="orow" data-sel><span class="veh">🚕</span><span><span class="t">Cab, just you</span><span class="d">Door to door · 44 min · traffic</span></span><span class="p">₹380<span class="rch">Reach 8:56</span></span></button>
           </div>
           <button class="cta" data-go="s2"><span>Continue with Shared</span><span>₹67</span></button>
         </div>
@@ -195,7 +221,7 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
         <div class="topbar"><button class="circle" data-go="s1"><i data-lucide="chevron-left"></i></button><div class="chip"><span class="dot"></span><span id="chipReach">Reach DTU 8:48 · class at 9</span></div></div>
         <div class="sheet" style="top:270px">
           <div class="grab"></div>
-          <div class="sum"><div><div class="small" style="font-weight:700">Door to door</div><div class="big" id="tt">36 min</div></div><div style="text-align:right"><div class="small" style="font-weight:700">One payment</div><div class="big" id="tp">₹67</div></div></div>
+          <div class="sum"><div><div class="small" style="font-weight:700">Reach DTU · <span id="tt">36 min</span></div><div class="big" id="treach" style="color:var(--hopd)">8:48</div></div><div style="text-align:right"><div class="small" style="font-weight:700">One payment</div><div class="big" id="tp">₹67</div></div></div>
           <div class="bar" id="bar"></div>
           <div class="seg" id="seg"><button data-leg="0">First mile</button><button data-leg="1">Metro</button><button data-leg="2" class="on">Last mile</button></div>
           <div class="legname" id="legname">Rohini Sector 18-19 metro → DTU campus · 2.5 km</div>
@@ -212,12 +238,14 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
           <div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
           <div class="h1">Pick your seat</div>
           <div class="sub">Shared e-rickshaw · Rohini Sector 18-19 metro → DTU campus</div>
-          <div class="vehbox erick">
-            <div class="srow"><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div></div>
-            <div class="lbl">Facing forward</div>
-            <div class="srow"><button class="seat taken"><i data-lucide="user-round"></i>Taken</button><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button></div>
-            <div class="lbl">Facing back</div>
-            <div class="srow"><div class="seat pink"><span style="font-size:15px;font-weight:800;line-height:1">♀</span>Women</div><button class="seat" data-seat><i data-lucide="armchair"></i>Free</button></div>
+          <div class="vehwrap" style="height:310px">
+            <svg viewBox="0 0 220 310"><rect x="100" y="2" width="20" height="20" rx="5" fill="#222"/><path d="M70 26 Q110 6 150 26 L196 92 Q206 104 206 118 L206 290 Q206 304 192 304 L28 304 Q14 304 14 290 L14 118 Q14 104 24 92 Z" fill="#fafafa" stroke="#111" stroke-width="3"/><line x1="82" y1="40" x2="138" y2="40" stroke="#111" stroke-width="4" stroke-linecap="round"/><rect x="2" y="226" width="12" height="48" rx="4" fill="#222"/><rect x="206" y="226" width="12" height="48" rx="4" fill="#222"/><line x1="30" y1="110" x2="190" y2="110" stroke="#cfcfd6" stroke-width="2" stroke-dasharray="5 5"/><rect x="40" y="118" width="140" height="6" rx="3" fill="#111"/><rect x="40" y="282" width="140" height="6" rx="3" fill="#111"/></svg>
+            <div class="seat drv" style="left:84px;top:52px"><i data-lucide="steering-wheel"></i>Driver</div>
+            <button class="seat taken" style="left:44px;top:128px"><i data-lucide="user-round"></i>Taken</button>
+            <button class="seat mine" data-seat style="left:124px;top:128px"><i data-lucide="check"></i>Yours</button>
+            <div class="ff" style="top:184px">↑ face to face ↓</div>
+            <div class="seat pink" style="left:44px;top:230px"><span style="font-size:15px;font-weight:800;line-height:1">♀</span>Women</div>
+            <button class="seat" data-seat style="left:124px;top:230px"><i data-lucide="armchair"></i>Free</button>
           </div>
           <div class="legend"><span><i style="background:var(--hop)"></i>Yours</span><span><i style="background:#e8e8ed"></i>Taken</span><span><i style="border:1.5px solid #111"></i>Free</span><span><i style="background:var(--pink2);border:1.5px solid var(--pink)"></i>Women only</span></div>
           <div class="note pk"><i data-lucide="shield-check"></i>One seat in every shared ride is held for women, day and night.</div>
@@ -235,6 +263,7 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
           <div class="stepper"><i class="on"></i><i class="on"></i><i class="on"></i></div>
           <div class="h1">One payment for the whole trip</div>
           <div class="sub">No cash, no recharge queue, no second app.</div>
+          <div><span class="reachpill"><i data-lucide="clock-3"></i><span id="pReach">Reach DTU 8:48 · 36 min</span></span></div>
           <div class="receipt">
             <div class="rrow"><span class="i" id="i1">🛺</span><div><b>PG → Model Town metro</b><span id="r1">Shared e-rickshaw · 6 min</span></div><span class="p" id="p1">₹15</span></div>
             <div class="rrow"><span class="i">🚇</span><div><b>Yellow Line · 5 stops</b><span>Model Town → Rohini 18-19 · QR ticket</span></div><span class="p">₹32</span></div>
@@ -254,7 +283,7 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
         <div class="topbar"><div class="chip"><span class="dot y"></span>Yellow Line · 2 stops to Rohini 18-19</div><div class="circle"><i data-lucide="share-2"></i></div></div>
         <div class="sheet">
           <div class="grab"></div>
-          <div style="display:flex;gap:12px;align-items:center"><div class="ok"><i data-lucide="check"></i></div><div><div class="h1" style="font-size:21px">Your seat is booked</div><div class="sub" style="margin-top:1px">Waiting at Gate 3. It leaves when you get there.</div></div></div>
+          <div style="display:flex;gap:12px;align-items:center"><div class="ok"><i data-lucide="check"></i></div><div><div class="h1" style="font-size:21px">Your seat is booked</div><div class="sub" style="margin-top:1px">Waiting at Gate 3. <b style="color:var(--hopd)">Reach DTU 8:48.</b></div></div></div>
           <div class="drvc"><span class="av">RK</span><div><b>Ramesh Kumar</b><span>★ 4.8 · 1,240 rides · verified</span></div><span class="plate">DL 1ER 4417</span></div>
           <div class="steps"><span class="s done"><i></i>E-rickshaw</span><span class="ln"></span><span class="s now"><i></i>Metro</span><span class="ln"></span><span class="s"><i></i>Gate 3</span><span class="ln"></span><span class="s"><i></i>DTU 8:48</span></div>
           <div class="row2"><button class="ghost"><i data-lucide="qr-code"></i>Metro QR</button><button class="ghost"><i data-lucide="share-2"></i>Share trip</button><button class="ghost sos"><i data-lucide="siren"></i>SOS</button></div>
@@ -265,18 +294,18 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
       <section class="view" id="s6">
         <div class="page">
           <div class="h1">Pune → Mumbai</div>
-          <div class="sub">Tomorrow, Mon 6 Oct</div>
-          <div class="route"><div class="r"><i></i>Baner, Pune</div><div class="r"><i class="sq"></i>BKC, Mumbai</div></div>
-          <div class="arr"><div>Arrive by<b>10:30 AM</b></div><div>Travellers<b>1 adult</b></div></div>
-          <div class="modes"><button class="on">All</button><button>Pool</button><button>Bus</button><button>Train</button><button>Flight</button><button>Cab</button></div>
-          <div class="ic-list">
-            <button class="ic sel" data-sel><span class="e">🚗</span><span><span class="t">Hop Pool <span class="tag g">On time</span></span><span class="d">6:15 → 9:40 · door to door · 3 h 25 m</span></span><span class="p">₹450<small>fixed</small></span></button>
-            <button class="ic" data-sel><span class="e">🚌</span><span><span class="t">E-Shivneri + Hop auto <span class="tag g">On time</span></span><span class="d">6:00 → 10:05 · Wakad → Dadar → BKC</span></span><span class="p">₹560<small>est.</small></span></button>
-            <button class="ic" data-sel><span class="e">🚆</span><span><span class="t">Deccan Queen + local <span class="tag r">Late</span></span><span class="d">7:15 → 11:05 · Pune Jn → CSMT → BKC</span></span><span class="p">₹185<small>est.</small></span></button>
-            <button class="ic" data-sel><span class="e">✈️</span><span><span class="t">Flight PNQ → BOM <span class="tag g">On time</span></span><span class="d">5:30 → 9:35 · incl. airport time</span></span><span class="p">₹4,800<small>est.</small></span></button>
-            <button class="ic" data-sel><span class="e">🚕</span><span><span class="t">Cab, just you <span class="tag g">On time</span></span><span class="d">6:30 → 9:50 · tolls extra</span></span><span class="p">₹3,200<small>est.</small></span></button>
+          <div class="r2"><div>Baner, Pune → BKC, Mumbai<small>Tomorrow, Mon 6 Oct · 1 adult</small></div><div style="text-align:right">Arrive by<small style="color:#000;font-size:14px;font-weight:800">10:30 AM</small></div></div>
+          <div class="sortrow"><span>Sort</span><button class="on" data-sort="best">Best</button><button data-sort="reach">Earliest</button><button data-sort="price">Cheapest</button><button data-sort="dur">Fastest</button></div>
+          <div class="modes2"><button class="on" data-mode="all">All</button><button data-mode="pool">🚗 Pool</button><button data-mode="bus">🚌 Bus</button><button data-mode="train">🚆 Train</button><button data-mode="flight">✈️ Flight</button><button data-mode="cab">🚕 Cab</button></div>
+          <div class="ilist" id="ilist">
+            <button class="ic2 sel" data-sel data-mode="pool" data-best="1" data-reach="580" data-price="450" data-dur="205"><span class="e">🚗</span><span><span class="t">Hop Pool <span class="tag g">Best</span></span><span class="lg">Leave 6:15 · door to door · 3 h 25 m</span></span><span class="rt"><b>₹450</b><span class="rv">Reach 9:40</span></span></button>
+            <button class="ic2" data-sel data-mode="flight" data-best="2" data-reach="555" data-price="4800" data-dur="240"><span class="e">✈️</span><span><span class="t">Flight PNQ → BOM</span><span class="lg">Leave 5:15 · 🚕 40m · airport 1h · ✈️ 55m · 🚕 45m</span></span><span class="rt"><b>₹4,800</b><span class="rv">Reach 9:15</span></span></button>
+            <button class="ic2" data-sel data-mode="bus" data-best="3" data-reach="605" data-price="560" data-dur="260"><span class="e">🚌</span><span><span class="t">E-Shivneri bus</span><span class="lg">Leave 5:45 · 🛺 15m · 🚌 3h 15m · 🛺 25m</span></span><span class="rt"><b>₹560</b><span class="rv">Reach 10:05</span></span></button>
+            <button class="ic2" data-sel data-mode="cab" data-best="4" data-reach="590" data-price="3200" data-dur="200"><span class="e">🚕</span><span><span class="t">Cab, just you</span><span class="lg">Leave 6:30 · door to door · tolls extra</span></span><span class="rt"><b>₹3,200</b><span class="rv">Reach 9:50</span></span></button>
+            <button class="ic2" data-sel data-mode="train" data-best="5" data-reach="665" data-price="185" data-dur="265"><span class="e">🚆</span><span><span class="t">Deccan Queen <span class="tag r">Late</span></span><span class="lg">Leave 6:40 · 🛺 25m · 🚆 3h 10m · local 30m</span></span><span class="rt"><b>₹185</b><span class="rv late">Reach 11:05</span></span></button>
           </div>
           <div class="spacer"></div>
+          <div class="small" style="margin-top:6px">Times are door to door, including getting to and from the airport or station. Prices except Hop are estimates.</div>
           <button class="cta" data-go="s7"><span>Pick a car in Hop Pool</span><span>₹450</span></button>
         </div>
       </section>
@@ -288,9 +317,9 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
           <div class="h1">Pick a car</div>
           <div class="sub">Fixed ₹450 a seat, tolls included. Verified drivers on this route.</div>
           <div class="cars">
-            <button class="ic sel" data-sel><span class="av">VS</span><span><span class="t">Vikram · Hyundai Creta</span><span class="d">Leaves 6:15 · Wakad pickup · ★ 4.9 · 312 trips</span></span><span class="p">2<small>seats left</small></span></button>
-            <button class="ic" data-sel><span class="av">NJ</span><span><span class="t">Neha · Maruti Ciaz</span><span class="d">Leaves 6:40 · Baner pickup · ★ 4.8 · women only</span></span><span class="p">1<small>seat left</small></span></button>
-            <button class="ic" data-sel><span class="av">AR</span><span><span class="t">Arjun · Toyota Innova</span><span class="d">Leaves 7:00 · Aundh pickup · ★ 4.7 · 6-seater</span></span><span class="p">3<small>seats left</small></span></button>
+            <button class="ic sel" data-sel><span class="av">VS</span><span><span class="t">Vikram · Hyundai Creta</span><span class="d">Leaves 6:15 · Wakad pickup · ★ 4.9 · 312 trips</span></span><span class="p"><span class="rch" style="margin:0 0 2px">Reach 9:40</span>2 seats</span></button>
+            <button class="ic" data-sel><span class="av">NJ</span><span><span class="t">Neha · Maruti Ciaz</span><span class="d">Leaves 6:40 · Baner pickup · ★ 4.8 · women only</span></span><span class="p"><span class="rch" style="margin:0 0 2px">Reach 10:05</span>1 seat</span></button>
+            <button class="ic" data-sel><span class="av">AR</span><span><span class="t">Arjun · Toyota Innova</span><span class="d">Leaves 7:00 · Aundh pickup · ★ 4.7 · 6-seater</span></span><span class="p"><span class="rch" style="margin:0 0 2px">Reach 10:20</span>3 seats</span></button>
           </div>
           <div style="margin-top:12px"><div class="li"><i data-lucide="radar"></i>Live arrival time, the whole way</div><div class="li"><i data-lucide="refresh-ccw"></i>Driver cancels? Next car, same price</div><div class="li"><i data-lucide="receipt-text"></i>GST invoice for your office claim</div></div>
           <div class="spacer"></div>
@@ -304,14 +333,17 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
           <div class="hd"><button class="back" data-go="s7"><i data-lucide="chevron-left"></i></button><div class="s">Vikram's Creta · MH 12 TV 2208</div></div>
           <div class="h1">Pick your seat</div>
           <div class="sub">3 riders max, so the middle seat stays empty.</div>
-          <div class="vehbox car">
-            <div class="lbl">Front</div>
-            <div class="srow"><button class="seat taken"><i data-lucide="user-round"></i>Taken</button><div class="seat ghost"></div><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div></div>
-            <div class="lbl" style="margin-top:12px">Back</div>
-            <div class="srow"><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button><div class="seat off">Empty</div><div class="seat pink"><span style="font-size:15px;font-weight:800;line-height:1">♀</span>Women</div></div>
+          <div><span class="reachpill"><i data-lucide="clock-3"></i>Leave 6:15 · Reach BKC 9:40 AM</span></div>
+          <div class="vehwrap" style="height:322px">
+            <svg viewBox="0 0 220 322"><rect x="6" y="62" width="14" height="44" rx="5" fill="#222"/><rect x="200" y="62" width="14" height="44" rx="5" fill="#222"/><rect x="6" y="226" width="14" height="44" rx="5" fill="#222"/><rect x="200" y="226" width="14" height="44" rx="5" fill="#222"/><path d="M44 26 Q110 2 176 26 L194 72 L198 288 Q198 318 168 318 L52 318 Q22 318 22 288 L26 72 Z" fill="#fafafa" stroke="#111" stroke-width="3"/><path d="M48 90 Q110 72 172 90 L164 114 Q110 102 56 114 Z" fill="#dde2ea"/><path d="M58 282 Q110 292 162 282 L168 302 Q110 312 52 302 Z" fill="#dde2ea"/><rect x="12" y="104" width="12" height="8" rx="3" fill="#111"/><rect x="196" y="104" width="12" height="8" rx="3" fill="#111"/><text x="110" y="52" text-anchor="middle" font-family="Inter" font-size="10" font-weight="800" fill="#8a8a93">FRONT</text></svg>
+            <button class="seat taken" style="left:46px;top:128px"><i data-lucide="user-round"></i>Taken</button>
+            <div class="seat drv" style="left:122px;top:128px"><i data-lucide="steering-wheel"></i>Driver</div>
+            <button class="seat mine" data-seat style="left:34px;top:212px;width:48px"><i data-lucide="check"></i>Yours</button>
+            <div class="seat off" style="left:86px;top:212px;width:48px">Empty</div>
+            <div class="seat pink" style="left:138px;top:212px;width:48px"><span style="font-size:15px;font-weight:800;line-height:1">♀</span>Women</div>
           </div>
           <div class="legend"><span><i style="background:var(--hop)"></i>Yours</span><span><i style="background:#e8e8ed"></i>Taken</span><span><i style="background:var(--pink2);border:1.5px solid var(--pink)"></i>Women only</span></div>
-          <div style="margin-top:10px"><div class="li"><i data-lucide="credit-card"></i>UPI, card or company wallet</div><div class="li"><i data-lucide="headset"></i>24×7 support, a real person</div><div class="li"><i data-lucide="clock-3"></i>Reach BKC 9:40 AM</div></div>
+          <div style="margin-top:10px"><div class="li"><i data-lucide="credit-card"></i>UPI, card or company wallet</div><div class="li"><i data-lucide="headset"></i>24×7 support, a real person</div></div>
           <div class="spacer"></div>
           <button class="cta"><span>Reserve seat</span><span>₹450</span></button>
         </div>
@@ -324,11 +356,11 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
         <div class="sheet" style="top:300px">
           <div class="grab"></div>
           <div class="h1">Thane → BKC</div>
-          <div class="sub">Cheapest first · Karan</div>
+          <div class="sub">Cheapest first · leave 8:20</div>
           <div class="olist">
-            <button class="orow sel" data-sel><span class="veh">🚆</span><span><span class="t">Local + BEST bus <span class="tag">Cheapest</span></span><span class="d">8:24 fast local, platform 2 · bus at Kurla (W)</span></span><span class="p">₹20<small>58 min</small></span></button>
-            <button class="orow" data-sel><span class="veh">🛺</span><span><span class="t">Local + shared auto</span><span class="d">Shared auto from Kurla (W), 3 of 4 seats taken</span></span><span class="p">₹35<small>52 min</small></span></button>
-            <button class="orow" data-sel><span class="veh">🚕</span><span><span class="t">Cab, just you</span><span class="d">Eastern Express Highway traffic</span></span><span class="p">₹650<small>75 min</small></span></button>
+            <button class="orow sel" data-sel><span class="veh">🚆</span><span><span class="t">Local + BEST bus <span class="tag">Cheapest</span></span><span class="d">8:24 fast local, platform 2 · bus at Kurla (W)</span></span><span class="p">₹20<span class="rch">Reach 9:18</span></span></button>
+            <button class="orow" data-sel><span class="veh">🛺</span><span><span class="t">Local + shared auto</span><span class="d">Shared auto from Kurla (W), 3 of 4 seats taken</span></span><span class="p">₹35<span class="rch">Reach 9:12</span></span></button>
+            <button class="orow" data-sel><span class="veh">🚕</span><span><span class="t">Cab, just you</span><span class="d">Eastern Express Highway traffic</span></span><span class="p">₹650<span class="rch">Reach 9:35</span></span></button>
           </div>
           <div class="qrcard"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYYAAAGGAQAAAABX+xtIAAADTklEQVR4nO1cbYrjMAx9cgLzM73BHCW9wR5p2CPtDZKjzAEWkp8DDVokWYlbWEiWZUhdvR8hcSs6zrNkfXmIcQxLOigAhMS53hV42O46FtyA3i7MgIwN3c2/1N2Cwf1Ip5RogW6Sm6UF5vZGcs/j5bdeWsYsIx1g9mD8cdJ5pJA49K4WIrrIQ/dF6CeAPqaGZQkA47ur+EikCyLe7n6kU0q0xX0/gQkdA+NlApkBmN+Y+mH53r8qhcQ3vavxshBGakHXmcg2+n5a6H/+xj6knd/bEBLH3lXDzKLSvVh0se2Z7k81AmLl9VFduni7tfntt79fMsJvr4HzEhKhqZ5rhKYGQMY0YMuIWK0CzofObLajCMjVrKu9b3ws9LwGzgW2WWdqdSQTr3ruF5YUTeh5BZwPumPDfThz6ZRkXwKWlvMvn3MeKST2g41uVexC7Vft1nVgGq8Izp9+JSKHaXdZ9nXvLq0AsgE45zxSSOwHr8ib+mrWfQMvrTzCtj//SoTpdN6xhVo8ZGdWlx26QELPq+Cc+V6T3Zh7kO4BG4LzWjjHll11V820e/Pg1z2+Dz1/fs5T4ZSbdksFVauq8oEWWemqY4Lxct55HER6ZYmZpH4u5bO5BdH7F9GHlldmsnK6sq+QZXHaeRxEelkJeDNU7oOyZJzH4razuwfPauDPOY8UEvvBFpd5BdUTb56i2bz6Pnw41CGBTLKnXbcaizl36tflMkwTOZlKOOetSWK6u+gubtqtj7YiwrZXwPlgWRdXdqN7DcgLFZ8snDvnPFJI7AcXVRQvk2fPzT4ozDpCz2tYifDsW6b2Ifvm2s25sB5+ex2cI7tqW9p1q6sVxTUOPUdVNRbcuey5Y8bbopx4Dr+9Ls6xRureIGXavXr1yPbgnPNIIfEv9XPeqmlrs0zRIzdEbxTqPJeKbMzXJXDfMoeIzys7l4qlZUC0+xeB0cm5VEOjbrxsAnH+vK5zqWg4101V4z+lzKanUaX0doWcZotaah2cr5Di6XgB+KeWVt3A04fH508yj11ILyuBosf1vrnZ8zSKxtM2sZ/XdS4V85uQvBAP1hiTld3GeDr7PI4hvawEHt3z7aBiWVhv1pJLxOdPzznF/43ajXMyeFziD79CGJEr0RkVAAAAAElFTkSuQmCC" alt="Trip ticket QR"><div><b>One ticket · ₹20</b><div class="lg">Thane → Kurla · local, 2nd class<br>Kurla (W) → BKC · BEST bus<br>Pinged 2 min before each arrives</div></div></div>
         </div>
@@ -342,6 +374,7 @@ html.shot,body.shot{background:transparent}body.shot .side{display:none}body.sho
           <div class="grab"></div>
           <div class="h1">Riya's ride home</div>
           <div class="sub">Shared e-rickshaw · 2 other students · leaves 7:30 PM</div>
+          <div><span class="reachpill"><i data-lucide="house"></i>Home by 7:52 PM</span></div>
           <div class="drvc"><span class="av">SY</span><div><b>Suresh Yadav</b><span>Police-verified · ★ 4.9 · coaching routes</span></div><span class="plate">DL 1ER 9032</span></div>
           <div style="margin-top:8px"><div class="li"><i data-lucide="map-pin"></i>Live location until she's home</div><div class="li"><i data-lucide="shield-check"></i>Same driver, same route, every day</div><div class="li"><i data-lucide="bell"></i>Alert if the route changes</div></div>
         </div>
@@ -381,7 +414,7 @@ const WALK=7;
 function total(){let p=0,m=WALK;LEGS.forEach(l=>{const o=l.opts[l.sel];p+=o[3];m+=o[4]});return[p,m]}
 function render(){const [p,m]=total(),end=8*60+12+m,t=`${Math.floor(end/60)}:${String(end%60).padStart(2,'0')}`;
   const $=id=>document.getElementById(id);
-  $('tt').textContent=m+' min';$('tp').textContent='₹'+p;$('ctap').textContent='₹'+p;$('ctap2').textContent='₹'+p;$('chipReach').textContent=`Reach DTU ${t} · class at 9`;
+  $('tt').textContent=m+' min';$('treach').textContent=t;if($('pReach'))$('pReach').textContent=`Reach DTU ${t} · ${m} min`;$('tp').textContent='₹'+p;$('ctap').textContent='₹'+p;$('ctap2').textContent='₹'+p;$('chipReach').textContent=`Reach DTU ${t} · class at 9`;
   $('bar').innerHTML=LEGS.map((l,i)=>{const o=l.opts[l.sel];return `<div class="${i==1?'x':'s'}" style="flex:${o[4]}">${o[0]} ${o[4]}m</div>`}).join('')+`<div class="w" style="flex:${WALK}">🚶 ${WALK}m</div>`;
   $('seg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.leg===cur));
   $('legname').textContent=LEGS[cur].name;
@@ -403,6 +436,10 @@ document.addEventListener('click',e=>{
   const op=e.target.closest('[data-opt]');if(op){LEGS[cur].sel=+op.dataset.opt;render();return}
   const st=e.target.closest('[data-seat]');if(st){st.closest('.vehbox').querySelectorAll('[data-seat]').forEach(x=>{x.classList.remove('mine');x.innerHTML='<i data-lucide="armchair"></i>Free'});st.classList.add('mine');st.innerHTML='<i data-lucide="check"></i>Yours';lucide.createIcons();return}
   const o=e.target.closest('[data-sel]');if(o){o.parentElement.querySelectorAll('[data-sel]').forEach(x=>x.classList.remove('sel'));o.classList.add('sel')}});
+document.addEventListener('click',e=>{const sb=e.target.closest('[data-sort]');if(sb){sb.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===sb));
+  const L=document.getElementById('ilist'),k=sb.dataset.sort;[...L.children].sort((a,b)=>+a.dataset[k]-+b.dataset[k]).forEach(n=>L.appendChild(n));}
+  const mb=e.target.closest('[data-mode]');if(mb&&mb.closest('.modes2')){mb.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===mb));
+  document.querySelectorAll('#ilist .ic2').forEach(c=>c.style.display=(mb.dataset.mode==='all'||c.dataset.mode===mb.dataset.mode)?'':'none');}},true);
 const ids=CH.flatMap(c=>c.steps.map(s=>s[0]));
 document.addEventListener('keydown',e=>{const i=ids.indexOf((document.querySelector('.view.on')||{}).id);
   if(e.key==='ArrowRight')go(ids[Math.min(ids.length-1,i+1)]);if(e.key==='ArrowLeft')go(ids[Math.max(0,i-1)]);});
