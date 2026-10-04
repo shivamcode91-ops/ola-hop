@@ -9,296 +9,340 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 <style>
-:root{
-  --black:#000; --ink:#0d0d0f; --g900:#141416; --g800:#1c1c1f; --g700:#2a2a2e; --g500:#6e6e76; --g400:#8e8e96; --g300:#c4c4c9; --g100:#f2f2f4; --white:#fff;
-  --hop:#00c46a; --hopd:#00a058; --yellow:#ffcc00; --red:#ff3b30; --blue:#3d7bff;
-}
+:root{--hop:#00c46a;--hopd:#00a058;--yellow:#ffcc00;--blue:#3d7bff;--g:#f3f3f5;--m:#6b6b73}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#0a0a0b;color:var(--white);font-family:Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{background:#0a0a0b;color:#fff;font-family:Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 svg.lucide{width:1em;height:1em;stroke-width:2}
 button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
-
-/* viewer */
-.viewer{min-height:100vh;display:grid;grid-template-columns:320px 1fr;gap:0}
-.side{padding:44px 32px;border-right:1px solid #1d1d20;display:flex;flex-direction:column;gap:28px}
+.viewer{min-height:100vh;display:grid;grid-template-columns:330px 1fr}
+.side{padding:40px 30px;border-right:1px solid #1d1d20;display:flex;flex-direction:column;gap:22px;overflow:auto;height:100vh}
 .brand{font-size:26px;font-weight:800;letter-spacing:-.03em}.brand span{color:var(--hop)}
-.side p{color:var(--g400);font-size:14px;line-height:1.5}
-.nav{display:flex;flex-direction:column;gap:6px}
-.nav button{display:flex;gap:12px;align-items:center;text-align:left;padding:12px 14px;border-radius:14px;color:var(--g300);font-size:14px;font-weight:500}
-.nav button .n{width:26px;height:26px;border-radius:50%;background:#1a1a1d;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--g400);flex:0 0 26px}
+.side p{color:#8e8e96;font-size:13.5px;line-height:1.5}
+.chap{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5d5d66;margin:6px 0 2px 4px}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav button{display:flex;gap:11px;align-items:center;text-align:left;padding:9px 12px;border-radius:12px;color:#c4c4c9;font-size:13.5px;font-weight:500}
+.nav button .n{width:24px;height:24px;border-radius:50%;background:#1a1a1d;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#8e8e96;flex:0 0 24px}
 .nav button.on{background:#17171a;color:#fff}.nav button.on .n{background:var(--hop);color:#000}
-.nav small{display:block;color:var(--g500);font-size:12px;margin-top:2px}
-.stage{display:flex;align-items:center;justify-content:center;padding:40px}
-.hint{color:var(--g500);font-size:12px}
-
-/* phone */
-.phone{width:390px;height:844px;border-radius:56px;background:#000;padding:12px;box-shadow:0 0 0 2px #2b2b30,0 40px 120px rgba(0,0,0,.6);position:relative}
+.stage{display:flex;align-items:center;justify-content:center;height:100vh;padding:20px}
+.phone{width:390px;height:844px;border-radius:56px;background:#000;padding:12px;box-shadow:0 0 0 2px #2b2b30,0 40px 120px rgba(0,0,0,.6);position:relative;transform-origin:center}
 .screen{width:100%;height:100%;border-radius:46px;overflow:hidden;position:relative;background:#0b0c0e}
-.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000;z-index:20}
-.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 32px 0 36px;font-size:15px;font-weight:600;z-index:15;color:#fff}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000;z-index:30}
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 32px 0 36px;font-size:15px;font-weight:600;z-index:25;color:#fff}
+.status.dk{color:#000}
 .status .r{display:flex;gap:6px;align-items:center;font-size:14px}
-.view{position:absolute;inset:0;display:none}
-.view.on{display:block}
-.map{position:absolute;inset:0}
-.map svg{width:100%;height:100%;display:block}
-
-/* floating top elements */
-.topbar{position:absolute;top:58px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10}
-.circle{width:44px;height:44px;border-radius:50%;background:rgba(20,20,22,.9);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid #26262a}
-.chip{background:rgba(20,20,22,.92);backdrop-filter:blur(10px);border:1px solid #26262a;border-radius:22px;padding:10px 14px;font-size:13px;font-weight:600;display:flex;gap:8px;align-items:center}
-.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(255,204,0,.18)}
-.chip .dot.g{background:var(--hop);box-shadow:0 0 0 4px rgba(0,196,106,.18)}
-
-/* sheet */
-.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;color:#000;border-radius:28px 28px 0 0;padding:10px 20px 30px;z-index:12;box-shadow:0 -20px 60px rgba(0,0,0,.5)}
-.grab{width:38px;height:5px;border-radius:3px;background:#d5d5da;margin:0 auto 14px}
-.h1{font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.sub{font-size:14px;color:#6b6b73;margin-top:4px}
-.opts{margin-top:14px;display:flex;flex-direction:column;gap:8px}
-.opt{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;border:2px solid transparent;background:#f4f4f6;text-align:left;width:100%}
+.view{position:absolute;inset:0;display:none}.view.on{display:block}
+.map{position:absolute;inset:0}.map svg{width:100%;height:100%;display:block}
+.topbar{position:absolute;top:58px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:10;gap:8px}
+.circle{width:44px;height:44px;border-radius:50%;background:rgba(20,20,22,.92);display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid #26262a;flex:0 0 44px;color:#fff}
+.back{width:38px;height:38px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;color:#000;flex:0 0 38px}
+.chip{background:rgba(20,20,22,.94);border:1px solid #26262a;border-radius:22px;padding:10px 14px;font-size:13px;font-weight:600;display:flex;gap:8px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--hop);box-shadow:0 0 0 4px rgba(0,196,106,.18)}
+.dot.y{background:var(--yellow);box-shadow:0 0 0 4px rgba(255,204,0,.18)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;color:#000;border-radius:28px 28px 0 0;padding:10px 18px 26px;z-index:12;box-shadow:0 -20px 60px rgba(0,0,0,.5);max-height:82%;overflow:auto;scrollbar-width:none}
+.sheet.full{top:0;max-height:none;border-radius:0;padding-top:60px}
+.grab{width:38px;height:5px;border-radius:3px;background:#d5d5da;margin:0 auto 12px}
+.hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.hd .small{font-weight:700}
+.h1{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.12}
+.sub{font-size:13.5px;color:var(--m);margin-top:3px}
+.opts{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.opt{display:grid;grid-template-columns:44px 1fr auto;gap:11px;align-items:center;padding:11px 12px;border-radius:16px;border:2px solid transparent;background:var(--g);text-align:left;width:100%;color:#000}
 .opt.sel{border-color:#000;background:#fff}
-.opt .ico{width:52px;height:40px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:22px}
-.opt.sel .ico{background:#f2f2f4}
-.opt .t{font-size:16px;font-weight:700;display:flex;gap:6px;align-items:center}
-.opt .d{font-size:13px;color:#6b6b73;margin-top:2px}
-.opt .p{font-size:17px;font-weight:800;text-align:right}
-.opt .p small{display:block;font-size:11px;font-weight:600;color:#6b6b73}
-.tag{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--hop);color:#000;border-radius:6px;padding:2px 6px}
-.tag.k{background:#000;color:#fff}
-.payrow{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:14px;font-weight:600}
-.payrow .l{display:flex;gap:8px;align-items:center}
-.upi{font-size:11px;font-weight:800;background:#f2f2f4;border-radius:6px;padding:3px 7px}
-.cta{margin-top:14px;width:100%;background:#000;color:#fff;border-radius:16px;padding:17px;font-size:17px;font-weight:700;display:flex;justify-content:center;gap:8px;align-items:center}
-.cta.g{background:var(--hop);color:#000}
-.row2{display:flex;gap:8px;margin-top:12px}
-.ghost{flex:1;background:#f2f2f4;border-radius:14px;padding:13px 6px;font-size:13px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px}
-.ghost svg{font-size:20px}
-.ghost.sos{background:#fff0ef;color:#d92c20}
-.ok{width:56px;height:56px;border-radius:50%;background:var(--hop);display:flex;align-items:center;justify-content:center;font-size:30px;color:#000;margin-bottom:12px}
-.card{background:#f4f4f6;border-radius:18px;padding:14px;margin-top:14px}
-.driver{display:flex;gap:12px;align-items:center}
-.av{width:46px;height:46px;border-radius:50%;background:#1d1d20;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
-.driver .nm{font-weight:800;font-size:16px}
-.driver .mt{font-size:12.5px;color:#6b6b73;margin-top:1px}
-.plate{margin-left:auto;white-space:nowrap;font-weight:800;font-size:12px;background:#fff;border:1.5px solid #000;border-radius:8px;padding:5px 8px;letter-spacing:.02em}
-.steps{display:flex;align-items:center;gap:6px;margin-top:14px;font-size:12px;font-weight:700;color:#6b6b73}
-.steps .s{display:flex;align-items:center;gap:5px}
+.opt .ico{width:44px;height:38px;border-radius:11px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.opt.sel .ico{background:var(--g)}
+.opt .t{font-size:15px;font-weight:700;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.opt .d{font-size:12.5px;color:var(--m);margin-top:2px;line-height:1.35}
+.opt .p{font-size:16px;font-weight:800;text-align:right;white-space:nowrap}
+.opt .p small{display:block;font-size:11px;font-weight:600;color:var(--m)}
+.tag{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--hop);color:#000;border-radius:6px;padding:2px 6px}
+.cta{margin-top:14px;width:100%;background:#000;color:#fff;border-radius:16px;padding:16px;font-size:16.5px;font-weight:700;display:flex;justify-content:center;gap:8px;align-items:center}
+.small{font-size:12px;color:var(--m)}
+.legs{margin-top:12px;display:flex;flex-direction:column}
+.leg{display:grid;grid-template-columns:30px 1fr;gap:10px;position:relative;padding-bottom:12px}
+.leg:before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:#e3e3e8}
+.leg:last-child:before{display:none}
+.leg .b{width:30px;height:30px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+.leg .b.m{background:var(--yellow);color:#000}
+.leg .lt{display:flex;justify-content:space-between;font-weight:700;font-size:14.5px}
+.leg .ld{font-size:12.5px;color:var(--m);margin-top:1px}
+.swaps{display:flex;gap:6px;margin-top:7px}
+.sw{flex:1;border:1.5px solid #e1e1e6;border-radius:12px;padding:6px 4px;font-size:12px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;color:#000}
+.sw small{font-weight:600;color:var(--m);font-size:11px}
+.sw.on{border-color:#000;background:#000;color:#fff}.sw.on small{color:#bbb}
+.total{display:flex;justify-content:space-between;align-items:center;background:var(--g);border-radius:16px;padding:12px 14px;margin-top:4px}
+.total .v{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.total .k{font-size:12px;color:var(--m);font-weight:600}
+.arrive{display:flex;gap:6px;align-items:center;font-size:12.5px;font-weight:700;color:var(--hopd);margin-top:3px}
+.veh{margin:16px auto 8px;width:210px;border:2.5px solid #000;border-radius:44px 44px 22px 22px;padding:16px 16px 18px}
+.veh.car{border-radius:64px 64px 34px 34px;width:232px;padding:28px 16px 22px}
+.seatrow{display:flex;gap:10px;justify-content:center;margin-bottom:10px}
+.seatrow:last-child{margin-bottom:0}
+.seat{width:58px;height:54px;border-radius:12px;border:2px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:700;background:#fff;color:#000}
+.seat svg{font-size:17px}
+.seat.taken{background:#e9e9ee;border-color:#e9e9ee;color:#9a9aa2}
+.seat.drv{background:#000;color:#fff;border-color:#000}
+.seat.off{border-style:dashed;color:#aaa;border-color:#c8c8cf}
+.seat.mine{background:var(--hop);border-color:var(--hop)}
+.legend{display:flex;gap:12px;justify-content:center;font-size:11.5px;color:var(--m);font-weight:600;margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.rows{margin-top:12px;background:var(--g);border-radius:16px;padding:2px 14px}
+.rw{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #e3e3e8;font-size:14px}
+.rw:last-child{border-bottom:0}
+.rw .l{display:flex;gap:10px;align-items:center;font-weight:600}
+.rw .l small{display:block;font-size:11.5px;color:var(--m);font-weight:500}
+.rw b{font-weight:800}
+.payrow{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:14px;font-weight:600}
+.upi{font-size:11px;font-weight:800;background:var(--g);border-radius:6px;padding:3px 7px;margin-right:6px}
+.card{background:var(--g);border-radius:16px;padding:12px;margin-top:10px}
+.driver{display:flex;gap:11px;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;background:#1d1d20;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:0 0 42px}
+.driver .nm{font-weight:800;font-size:15px}.driver .mt{font-size:12px;color:var(--m);margin-top:1px}
+.plate{margin-left:auto;white-space:nowrap;font-weight:800;font-size:11.5px;background:#fff;border:1.5px solid #000;border-radius:8px;padding:4px 7px}
+.steps{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;font-weight:700;color:var(--m)}
+.steps .s{display:flex;align-items:center;gap:5px;white-space:nowrap}
 .steps .s i{width:9px;height:9px;border-radius:50%;background:#c9c9cf;display:block}
 .steps .s.done i{background:#000}.steps .s.now{color:#000}.steps .s.now i{background:var(--hop);box-shadow:0 0 0 4px rgba(0,196,106,.2)}
 .steps .ln{flex:1;height:2px;background:#e1e1e6}
-.kvs{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.kv{background:#f4f4f6;border-radius:14px;padding:11px 12px}
-.kv .k{font-size:11px;color:#6b6b73;font-weight:600}
-.kv .v{font-size:15px;font-weight:800;margin-top:2px}
-.list{margin-top:12px;display:flex;flex-direction:column;gap:2px}
-.li{display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:600;padding:7px 0}
-.li svg{font-size:17px;color:var(--hopd);flex:0 0 auto}
-.search{display:flex;align-items:center;gap:10px;background:#f2f2f4;border-radius:16px;padding:15px 16px;font-size:17px;font-weight:700;margin-top:4px}
-.search svg{font-size:20px}
-.saved{display:flex;flex-direction:column;margin-top:8px}
-.sv{display:flex;gap:12px;align-items:center;padding:12px 2px;border-bottom:1px solid #eee}
-.sv .ic{width:40px;height:40px;border-radius:50%;background:#f2f2f4;display:flex;align-items:center;justify-content:center;font-size:18px}
-.sv b{font-size:15px}.sv span{display:block;font-size:12.5px;color:#6b6b73}
-.tabs{display:flex;justify-content:space-around;padding-top:12px;margin-top:10px;border-top:1px solid #eee;font-size:11px;font-weight:700;color:#8e8e96}
-.tabs div{display:flex;flex-direction:column;align-items:center;gap:3px}.tabs svg{font-size:21px}.tabs .on{color:#000}
-
-/* dark sheet variant (live) */
-.sheet.dark{background:#111113;color:#fff}
-.sheet.dark .sub{color:#9a9aa2}
-.sheet.dark .grab{background:#333}
-.sheet.dark .card,.sheet.dark .kv{background:#1c1c1f}
-.sheet.dark .kv .k{color:#9a9aa2}
-.big{font-size:56px;font-weight:800;letter-spacing:-.04em;line-height:1}
-.stops{margin-top:14px;position:relative;padding-left:22px}
-.stops:before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:3px;border-radius:2px;background:#2b2b30}
-.stp{position:relative;font-size:14px;font-weight:600;color:#9a9aa2;padding:6px 0}
-.stp:before{content:"";position:absolute;left:-21px;top:10px;width:11px;height:11px;border-radius:50%;background:#111113;border:2.5px solid #4a4a52}
-.stp.bus{color:#fff}.stp.bus:before{background:var(--hop);border-color:var(--hop);box-shadow:0 0 0 5px rgba(0,196,106,.2)}
-.stp.me{color:#fff;font-weight:800}.stp.me:before{background:#fff;border-color:#fff}
-.qr{width:92px;height:92px;border-radius:12px;background:#fff;padding:8px}
-.qr div{width:100%;height:100%;background:conic-gradient(from 90deg at 25% 25%,#000 25%,#fff 0) 0 0/19px 19px;border:5px solid #000;border-radius:4px}
-.toast{position:absolute;top:58px;left:12px;right:12px;z-index:14;background:rgba(28,28,31,.96);border:1px solid #2c2c31;border-radius:22px;padding:13px 14px;display:flex;gap:12px;align-items:center;backdrop-filter:blur(12px)}
-.toast .ap{width:36px;height:36px;border-radius:10px;background:#000;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:var(--hop)}
-.toast b{font-size:14px}.toast span{display:block;font-size:12.5px;color:#a1a1aa}
-@media (max-width:860px){.viewer{grid-template-columns:1fr}.side{border-right:0;padding:24px}.stage{padding:10px 0 40px}}
-/* screenshot mode: phone only */
-body.shot .side{display:none}body.shot .viewer{grid-template-columns:1fr}body.shot .stage{padding:0;min-height:auto}body.shot{background:transparent}
-body.shot .phone{box-shadow:0 0 0 2px #2b2b30}
+.row2{display:flex;gap:8px;margin-top:12px}
+.ghost{flex:1;background:var(--g);border-radius:14px;padding:11px 6px;font-size:12.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;color:#000}
+.ghost svg{font-size:19px}.ghost.sos{background:#fff0ef;color:#d92c20}
+.list{margin-top:10px;display:flex;flex-direction:column}
+.li{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;padding:6px 0}
+.li svg{font-size:16px;color:var(--hopd);flex:0 0 auto}
+.cars{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.carc{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:16px;background:var(--g);border:2px solid transparent;text-align:left;color:#000;width:100%}
+.carc.sel{background:#fff;border-color:#000}
+.carc .t{font-weight:800;font-size:14px}.carc .d{font-size:12px;color:var(--m);margin-top:1px}
+.carc .p{font-weight:800;font-size:12.5px;text-align:right;white-space:nowrap}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cmpc{border-radius:16px;padding:12px;background:var(--g);border:2px solid transparent;text-align:left;color:#000}
+.cmpc.sel{background:#fff;border-color:#000}
+.cmpc .k{font-size:12px;font-weight:700;color:var(--m)}
+.cmpc .v{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:3px 0 1px}
+.cmpc .d{font-size:12px;color:var(--m);line-height:1.35}
+.ok{width:52px;height:52px;border-radius:50%;background:var(--hop);display:flex;align-items:center;justify-content:center;font-size:28px;color:#000;flex:0 0 52px}
+.qr{width:92px;height:92px;border-radius:12px;background:#fff;border:1px solid #e3e3e8;padding:5px;flex:0 0 92px}
+.qr img{width:100%;height:100%;image-rendering:pixelated;display:block}
+.toast{position:absolute;top:58px;left:12px;right:12px;z-index:14;background:rgba(28,28,31,.97);border:1px solid #2c2c31;border-radius:22px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.toast .ap{width:36px;height:36px;border-radius:10px;background:#000;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:var(--hop)}
+.toast b{font-size:14px}.toast span{display:block;font-size:12px;color:#a1a1aa}
+.stepper{display:flex;gap:4px;margin-bottom:12px}.stepper i{flex:1;height:4px;border-radius:2px;background:#e3e3e8}.stepper i.on{background:#000}
+@media (max-width:860px){.viewer{grid-template-columns:1fr}.side{border-right:0;padding:24px;height:auto}.stage{height:auto;padding:10px 0 40px}}
+html.shot,body.shot{background:transparent}body.shot .side{display:none}body.shot .viewer{grid-template-columns:1fr}body.shot .stage{padding:0;height:auto}body.shot .phone{box-shadow:none}
 </style>
 </head>
 <body>
 <div class="viewer">
   <aside class="side">
-    <div>
-      <div class="brand">Ola <span>Hop</span></div>
-      <p style="margin-top:8px">Clickable prototype. Book the shared seat, not the vehicle. Tap through, or use ← → keys.</p>
-    </div>
+    <div><div class="brand">Ola <span>Hop</span></div>
+      <p style="margin-top:8px">Book the seat, not the vehicle. Follow Aarav's morning from his PG to a 9 AM class, then Sameer's Pune → Mumbai pool. Tap through, or use ← → keys.</p></div>
     <div class="nav" id="nav"></div>
-    <p class="hint">Prices for Ola Hop are illustrative. BEST bus ₹10 and shared auto ₹25 (Kurla → BKC) and the DTU e-rickshaw fare are current local fares. Shivam Purbe · Ola Electric APM assignment</p>
+    <p style="font-size:12px">Hop prices are illustrative. Metro fare (DMRC 5–12 km slab, ₹32), BEST bus ₹10 and the Kurla → BKC shared auto ₹25 are current local fares. Shivam Purbe · Ola Electric APM assignment</p>
   </aside>
   <main class="stage">
-    <div class="phone"><div class="screen" id="screen">
+    <div class="phone" id="phone"><div class="screen">
       <div class="island"></div>
-      <div class="status"><span>8:41</span><span class="r"><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></span></div>
+      <div class="status" id="status"><span>8:12</span><span class="r"><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></span></div>
 
-      <!-- 1 · last mile options -->
-      <section class="view" id="s1">
-        <div class="map" data-map="metro"></div>
-        <div class="topbar"><div class="chip"><span class="dot"></span>Yellow Line · Rohini Sec 18-19 in 2 stops</div><div class="circle"><i data-lucide="user-round"></i></div></div>
+      <section class="view" id="s1" data-dark>
+        <div class="map" data-map="plan"></div>
+        <div class="topbar"><div class="chip"><span class="dot"></span>Class at 9:00 AM · DTU</div><div class="circle"><i data-lucide="user-round"></i></div></div>
         <div class="sheet">
           <div class="grab"></div>
-          <div class="h1">To DTU campus</div>
-          <div class="sub">From Rohini Sector 18-19 metro · 2.5 km</div>
+          <div class="h1">Model Town → DTU</div>
+          <div class="sub">Pick how you want to go. One payment either way.</div>
           <div class="opts">
-            <button class="opt sel" data-sel><span class="ico">🛺</span><span><span class="t">Shared e-rickshaw <span class="tag">Cheapest</span></span><span class="d">2 seats booked · leaves when you arrive</span></span><span class="p">₹20<small>per seat</small></span></button>
-            <button class="opt" data-sel><span class="ico">🛺</span><span><span class="t">Auto, just you</span><span class="d">Ready at Gate 3 · 9 min ride</span></span><span class="p">₹60<small>est.</small></span></button>
-            <button class="opt" data-sel><span class="ico">🏍️</span><span><span class="t">Bike</span><span class="d">2 min away</span></span><span class="p">₹35<small>est.</small></span></button>
+            <button class="opt sel" data-sel><span class="ico">🛺</span><span><span class="t">Shared all the way <span class="tag">Cheapest</span></span><span class="d">E-rickshaw · Metro · E-rickshaw<br>36 min · reach 8:48</span></span><span class="p">₹67</span></button>
+            <button class="opt" data-sel><span class="ico">🏍️</span><span><span class="t">Faster ends</span><span class="d">Bike · Metro · Bike<br>31 min · reach 8:43</span></span><span class="p">₹97<small>est.</small></span></button>
+            <button class="opt" data-sel><span class="ico">🚗</span><span><span class="t">Cab, just you</span><span class="d">Door to door, Outer Ring Road traffic<br>44 min · reach 8:56</span></span><span class="p">₹380<small>est.</small></span></button>
           </div>
-          <div class="payrow"><span class="l"><span class="upi">UPI</span>aarav@oksbi</span><span style="color:#6b6b73;font-size:13px">Change</span></div>
-          <button class="cta" data-go="s2">Book my seat · ₹20</button>
+          <button class="cta" data-go="s2">See the legs</button>
         </div>
       </section>
 
-      <!-- 2 · booked -->
       <section class="view" id="s2">
-        <div class="map" data-map="booked"></div>
-        <div class="topbar"><div class="circle" data-go="s1"><i data-lucide="chevron-left"></i></div><div class="chip"><span class="dot g"></span>Paid ₹20 by UPI</div></div>
+        <div class="sheet full">
+          <div class="hd"><button class="back" data-go="s1"><i data-lucide="chevron-left"></i></button><div class="small">Step 1 of 3 · Your trip</div></div>
+          <div class="stepper"><i class="on"></i><i></i><i></i></div>
+          <div class="h1">Swap any leg</div>
+          <div class="sub">Time and price update as you choose.</div>
+          <div class="legs">
+            <div class="leg"><span class="b"><i data-lucide="house"></i></span><div>
+              <div class="lt"><span>PG → Model Town metro</span><span id="l1p">₹15</span></div><div class="ld" id="l1d">Shared e-rickshaw · 6 min · 1.5 km</div>
+              <div class="swaps" data-leg="1"><button class="sw on" data-v="15,6,Shared e-rickshaw">🛺 Shared<small>₹15 · 6 min</small></button><button class="sw" data-v="30,4,Bike">🏍️ Bike<small>₹30 · 4 min</small></button><button class="sw" data-v="50,5,Auto, just you">🛺 Auto<small>₹50 · 5 min</small></button></div>
+            </div></div>
+            <div class="leg"><span class="b m"><i data-lucide="train-front"></i></span><div>
+              <div class="lt"><span>Yellow Line · 5 stops</span><span>₹32</span></div><div class="ld">Model Town → Rohini Sector 18-19 · 14 min<br>QR ticket in Hop, or tap your metro card</div>
+            </div></div>
+            <div class="leg"><span class="b"><i data-lucide="school"></i></span><div>
+              <div class="lt"><span>Rohini 18-19 → DTU</span><span id="l3p">₹20</span></div><div class="ld" id="l3d">Shared e-rickshaw · 9 min · 2.5 km</div>
+              <div class="swaps" data-leg="3"><button class="sw on" data-v="20,9,Shared e-rickshaw">🛺 Shared<small>₹20 · 9 min</small></button><button class="sw" data-v="35,6,Bike">🏍️ Bike<small>₹35 · 6 min</small></button><button class="sw" data-v="110,8,Cab, just you">🚗 Cab<small>₹110 · 8 min</small></button></div>
+            </div></div>
+          </div>
+          <div class="total"><div><div class="k">Door to door</div><div class="v" id="tt">36 min</div><div class="arrive"><i data-lucide="circle-check"></i><span id="ta">Reach DTU 8:48 · class at 9</span></div></div><div style="text-align:right"><div class="k">One payment</div><div class="v" id="tp">₹67</div></div></div>
+          <button class="cta" data-go="s3">Choose your seat</button>
+        </div>
+      </section>
+
+      <section class="view" id="s3">
+        <div class="sheet full">
+          <div class="hd"><button class="back" data-go="s2"><i data-lucide="chevron-left"></i></button><div class="small">Step 2 of 3 · Your seat</div></div>
+          <div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
+          <div class="h1">Pick your seat</div>
+          <div class="sub">E-rickshaw to DTU from Gate 3 · Ramesh · DL 1ER 4417</div>
+          <div class="veh">
+            <div class="seatrow"><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div></div>
+            <div class="seatrow"><button class="seat taken"><i data-lucide="user-round"></i>Taken</button><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button></div>
+            <div class="seatrow"><button class="seat" data-seat><i data-lucide="armchair"></i>Free</button><button class="seat taken"><i data-lucide="user-round"></i>Taken</button></div>
+          </div>
+          <div class="legend"><span><i style="background:var(--hop)"></i>Yours</span><span><i style="background:#e9e9ee"></i>Taken</span><span><i style="border:1.5px solid #000"></i>Free</span></div>
+          <div class="card" style="display:flex;gap:10px;align-items:center"><i data-lucide="users" style="font-size:18px;flex:0 0 auto"></i><span style="font-size:12.5px;font-weight:600">2 students on your metro booked this e-rickshaw too. It leaves as soon as the three of you reach Gate 3.</span></div>
+          <button class="cta" data-go="s4">Review and pay</button>
+        </div>
+      </section>
+
+      <section class="view" id="s4">
+        <div class="sheet full">
+          <div class="hd"><button class="back" data-go="s3"><i data-lucide="chevron-left"></i></button><div class="small">Step 3 of 3 · Pay once</div></div>
+          <div class="stepper"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          <div class="h1">One payment for the whole trip</div>
+          <div class="sub">No cash, no recharge queue, no second app.</div>
+          <div class="rows">
+            <div class="rw"><span class="l">🛺<span>E-rickshaw to metro<small id="r1">Shared e-rickshaw · 6 min</small></span></span><b id="p1">₹15</b></div>
+            <div class="rw"><span class="l">🚇<span>Yellow Line metro<small>QR ticket · Model Town → Rohini 18-19</small></span></span><b>₹32</b></div>
+            <div class="rw"><span class="l">🛺<span>E-rickshaw to DTU<small id="r3">Shared · back seat, right</small></span></span><b id="p3">₹20</b></div>
+          </div>
+          <div class="total" style="margin-top:10px"><div><div class="k">Total</div><div class="small">All fares included</div></div><div class="v" id="pt">₹67</div></div>
+          <div class="payrow"><span><span class="upi">UPI</span>aarav@oksbi</span><span class="small">Change</span></div>
+          <button class="cta" data-go="s5" id="paybtn">Pay ₹67</button>
+          <div class="small" style="text-align:center;margin-top:8px">Bill in your email · trip shared with Mom</div>
+        </div>
+      </section>
+
+      <section class="view" id="s5" data-dark>
+        <div class="map" data-map="metro"></div>
+        <div class="topbar"><div class="chip"><span class="dot y"></span>Yellow Line · 2 stops to Rohini 18-19</div><div class="circle"><i data-lucide="share-2"></i></div></div>
         <div class="sheet">
           <div class="grab"></div>
-          <div class="ok"><i data-lucide="check"></i></div>
-          <div class="h1">Your seat is booked</div>
-          <div class="sub">Your e-rickshaw will wait at <b style="color:#000">Gate 3</b>. It leaves when you get there.</div>
+          <div style="display:flex;gap:12px;align-items:center"><div class="ok"><i data-lucide="check"></i></div><div><div class="h1" style="font-size:21px">Your seat is booked</div><div class="sub" style="margin-top:1px">It waits at Gate 3 and leaves when you get there.</div></div></div>
           <div class="card"><div class="driver"><div class="av">RK</div><div><div class="nm">Ramesh Kumar</div><div class="mt">★ 4.8 · 1,240 rides · Verified</div></div><div class="plate">DL 1ER 4417</div></div></div>
-          <div class="steps"><span class="s done"><i></i>Metro</span><span class="ln"></span><span class="s now"><i></i>Gate 3</span><span class="ln"></span><span class="s"><i></i>DTU · 8:58</span></div>
-          <div class="row2">
-            <button class="ghost"><i data-lucide="share-2"></i>Share with Mom</button>
-            <button class="ghost"><i data-lucide="phone"></i>Call</button>
-            <button class="ghost sos"><i data-lucide="siren"></i>SOS</button>
-          </div>
+          <div class="steps"><span class="s done"><i></i>E-rickshaw</span><span class="ln"></span><span class="s now"><i></i>Metro</span><span class="ln"></span><span class="s"><i></i>Gate 3</span><span class="ln"></span><span class="s"><i></i>DTU 8:48</span></div>
+          <div class="row2"><button class="ghost"><i data-lucide="qr-code"></i>Metro QR</button><button class="ghost"><i data-lucide="share-2"></i>Share trip</button><button class="ghost sos"><i data-lucide="siren"></i>SOS</button></div>
         </div>
       </section>
 
-      <!-- 3 · newcomer: cheapest way -->
-      <section class="view" id="s3">
+      <section class="view" id="s6">
+        <div class="sheet full">
+          <div class="small" style="font-weight:700;margin-bottom:6px">Tomorrow · Sameer · client meeting at 11:00 AM</div>
+          <div class="h1">Baner, Pune → BKC, Mumbai</div>
+          <div class="cmp">
+            <button class="cmpc sel" data-sel><div class="k">Hop Pool, 1 seat</div><div class="v">₹450</div><div class="d">Fixed price, tolls in<br>Reach 9:40 AM</div></button>
+            <button class="cmpc" data-sel><div class="k">Cab, just you</div><div class="v">₹3,200</div><div class="d">Estimate, tolls extra<br>Reach 9:20 AM</div></button>
+          </div>
+          <div style="font-size:13px;font-weight:800;margin-top:14px">Pick a car</div>
+          <div class="cars">
+            <button class="carc sel" data-sel><span class="av">VS</span><span><div class="t">Vikram · Hyundai Creta</div><div class="d">6:15 AM · Wakad pickup · ★ 4.9 · 312 trips</div></span><span class="p">2 seats</span></button>
+            <button class="carc" data-sel><span class="av">NJ</span><span><div class="t">Neha · Maruti Ciaz</div><div class="d">6:40 AM · Baner pickup · ★ 4.8 · 128 trips</div></span><span class="p">1 seat</span></button>
+            <button class="carc" data-sel><span class="av">AR</span><span><div class="t">Arjun · Toyota Innova</div><div class="d">7:00 AM · Aundh · ★ 4.7 · 6-seater</div></span><span class="p">3 seats</span></button>
+          </div>
+          <div class="list"><div class="li"><i data-lucide="radar"></i>Live arrival time, the whole way</div><div class="li"><i data-lucide="refresh-ccw"></i>Driver cancels? Next car, same price</div></div>
+          <button class="cta" data-go="s7">Choose a seat in the Creta</button>
+        </div>
+      </section>
+
+      <section class="view" id="s7">
+        <div class="sheet full">
+          <div class="hd"><button class="back" data-go="s6"><i data-lucide="chevron-left"></i></button><div class="small">Vikram's Creta · MH 12 TV 2208</div></div>
+          <div class="h1">Pick your seat</div>
+          <div class="sub">3 riders max, so the middle seat stays empty.</div>
+          <div class="veh car">
+            <div class="seatrow"><div class="seat drv"><i data-lucide="steering-wheel"></i>Driver</div><button class="seat taken"><i data-lucide="user-round"></i>Taken</button></div>
+            <div class="seatrow"><button class="seat mine" data-seat><i data-lucide="check"></i>Yours</button><div class="seat off">Empty</div><button class="seat" data-seat><i data-lucide="armchair"></i>Free</button></div>
+          </div>
+          <div class="list" style="margin-top:6px">
+            <div class="li"><i data-lucide="receipt-text"></i>GST invoice for your office claim</div>
+            <div class="li"><i data-lucide="credit-card"></i>UPI, card or company wallet</div>
+            <div class="li"><i data-lucide="headset"></i>24×7 support, a real person</div>
+            <div class="li"><i data-lucide="clock-3"></i>Reach 9:40 AM, 80 min before your meeting</div>
+          </div>
+          <button class="cta">Reserve seat · ₹450</button>
+        </div>
+      </section>
+
+      <section class="view" id="s8" data-dark>
         <div class="map" data-map="mumbai"></div>
-        <div class="topbar"><div class="chip"><span class="dot g"></span>New to Mumbai? We'll guide you</div><div class="circle"><i data-lucide="user-round"></i></div></div>
+        <div class="topbar"><div class="chip"><span class="dot"></span>New to Mumbai? We'll guide you</div><div class="circle"><i data-lucide="user-round"></i></div></div>
         <div class="sheet">
           <div class="grab"></div>
           <div class="h1">Kurla station → BKC</div>
-          <div class="sub">Cheapest first · tickets inside the app</div>
+          <div class="sub">Cheapest first · Karan</div>
           <div class="opts">
-            <button class="opt sel" data-sel><span class="ico">🚌</span><span><span class="t">BEST bus <span class="tag">Live</span></span><span class="d">Next in 6 min · stop 200 m away</span></span><span class="p">₹10</span></button>
+            <button class="opt sel" data-sel><span class="ico">🚌</span><span><span class="t">BEST bus <span class="tag">Live</span></span><span class="d">3 stops away · 6 min · ticket inside</span></span><span class="p">₹10</span></button>
             <button class="opt" data-sel><span class="ico">🛺</span><span><span class="t">Shared auto</span><span class="d">3 of 4 seats taken · leaves in 2 min</span></span><span class="p">₹25</span></button>
             <button class="opt" data-sel><span class="ico">🚗</span><span><span class="t">Cab, just you</span><span class="d">4 min away</span></span><span class="p">₹180<small>est.</small></span></button>
           </div>
-          <button class="cta" data-go="s4">Buy bus ticket · ₹10</button>
+          <div class="card" style="display:flex;gap:12px;align-items:center;margin-top:12px"><div class="qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATYAAAE2AQAAAADDx4MEAAACVklEQVR4nO1aUWrDMAyV7MA+E9gBehT3ZrtafJQeYJB+Fhw0JNlJNzroT53ElT5MTASt/fIsPVlI8IzN7ik3APN7bM/uC9C4PLEB9OuQyqs+2T4/thfsSy9AyN7PCOHSgQwClLziJ8Pjsb1iX2ZEHHhy7YQLAHFgZCYAiIj4qt99xtyb+XV/5hTRJ4kpCP339v/PvbkfftENhRVrYKnxu/+Ze0N+eObDDBDPnqOIJzmhEHoACHSMdbh2/K7IJqGDqTHMSGOfNJ7LKzwfYh1N+AH9tkIXTzRq4qXZ197X4RrxA9l2yaVoZCgCJSjpr0wNj9r8SEA0+SxCgjwJPMaP7fhBKQMgKnDsMzIqQoKdVxXxgHws6Vz5wcYvlD2j1Utq1ktui+CQKH5DybmycMcPOkIcdI34wX1WtZ5XUIYcSSy/qqg/OgaFWSH1RA4Y2TxBPBGZ/qiJR+RSYhyy6kA8FbqEaRahLiTZO89dI34gJ5JWdTXJkijOQV3zXcuvtsAjLFdR63kVOHQwMpbv1tUfSfdetbiWrvqc75ZAb/G8rj4fl4KVwAOlcpJFoenBuvyg+9yW+NBieNRBgDJ+bFDfHXmu9cSJH5UuWk3Ze17imvGLeseBWIomXlWHypE8HGAd7fWXRO5ikCrJeSlssVl/Sd372rkD6V0IF6lVeb2v5SKWenBnwwG+q+b84rBSAzSS6BkWTJ9v0e8TpgEIrp8pc0baf4bvjoc9fC/v4AflGjBfEqrgYCupleVXW/WXxFMO6iRQ6CWI3oTs/rtyjfih9bc/tK3w+AGNX8SFWuGKqQAAAABJRU5ErkJggg==" alt="Bus ticket QR"></div><div><div style="font-weight:800;font-size:14px">Bus ticket · ₹10</div><div class="small">Show it to the conductor. We'll ping you 2 min before the bus arrives.</div></div></div>
         </div>
       </section>
 
-      <!-- 4 · live bus -->
-      <section class="view" id="s4">
-        <div class="map" data-map="bus"></div>
-        <div class="topbar"><div class="circle" data-go="s3"><i data-lucide="chevron-left"></i></div><div class="chip"><span class="dot g"></span>Ticket ready</div></div>
-        <div class="sheet dark">
-          <div class="grab"></div>
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-            <div><div class="sub" style="margin-top:0">Your bus to BKC arrives in</div><div class="big">6 min</div><div class="sub">3 stops away · seats free</div></div>
-            <div class="qr"><div></div></div>
-          </div>
-          <div class="stops">
-            <div class="stp bus">Kalina · bus is here</div>
-            <div class="stp">Vidyanagari</div>
-            <div class="stp">Kurla Depot</div>
-            <div class="stp me">Your stop · Kurla Station (W)</div>
-          </div>
-          <div class="list"><div class="li" style="color:#d4d4d8"><i data-lucide="bell-ring"></i>We'll ping you 2 minutes before it arrives</div></div>
-        </div>
-      </section>
-
-      <!-- 5 · Pune–Mumbai pool -->
-      <section class="view" id="s5">
-        <div class="map" data-map="highway"></div>
-        <div class="topbar"><div class="chip"><span class="dot g"></span>Pune → Mumbai · tomorrow</div><div class="circle"><i data-lucide="user-round"></i></div></div>
-        <div class="sheet">
-          <div class="grab"></div>
-          <div style="display:flex;justify-content:space-between;align-items:flex-end">
-            <div><div class="h1">Baner → BKC</div><div class="sub">Hop Pool · leaves 6:15 AM</div></div>
-            <div style="text-align:right"><div style="font-size:26px;font-weight:800;letter-spacing:-.03em">₹450</div><div class="sub" style="margin-top:0">fixed · tolls included</div></div>
-          </div>
-          <div class="card" style="margin-top:12px"><div class="driver"><div class="av">VS</div><div><div class="nm">Vikram S.</div><div class="mt">★ 4.9 · 312 trips on this route</div></div><div class="plate">MH 12 TV 2208</div></div></div>
-          <div class="kvs">
-            <div class="kv"><div class="k">Your seat</div><div class="v">Rear left</div></div>
-            <div class="kv"><div class="k">Riders</div><div class="v">3 max</div></div>
-          </div>
-          <div class="list">
-            <div class="li"><i data-lucide="radar"></i>Live arrival time, the whole way</div>
-            <div class="li"><i data-lucide="refresh-ccw"></i>Driver cancels? Next pool, same price</div>
-            <div class="li"><i data-lucide="receipt-text"></i>GST invoice for your office claim</div>
-            <div class="li"><i data-lucide="headset"></i>24×7 support, a real person</div>
-          </div>
-          <button class="cta">Reserve my seat · ₹450</button>
-        </div>
-      </section>
-
-      <!-- 6 · parent view -->
-      <section class="view" id="s6">
+      <section class="view" id="s9" data-dark>
         <div class="map" data-map="coaching"></div>
         <div class="toast"><div class="ap">hop</div><div><b>Riya reached Punjabi Bagh</b><span>Dropped at the coaching centre gate · 5:58 PM</span></div></div>
         <div class="sheet">
           <div class="grab"></div>
           <div class="h1">Riya's ride home</div>
           <div class="sub">Shared e-rickshaw · 2 other students · leaves 7:30 PM</div>
-          <div class="card"><div class="driver"><div class="av">SY</div><div><div class="nm">Suresh Yadav</div><div class="mt">Police-verified · 4.9 · school & coaching routes</div></div><div class="plate">DL 1ER 9032</div></div></div>
-          <div class="list">
-            <div class="li"><i data-lucide="map-pin"></i>Live location until she's home</div>
-            <div class="li"><i data-lucide="shield-check"></i>Same driver, same route, every day</div>
-            <div class="li"><i data-lucide="bell"></i>Alert if the route changes</div>
-          </div>
-          <div class="tabs"><div class="on"><i data-lucide="house"></i>Home</div><div><i data-lucide="clock-3"></i>Trips</div><div><i data-lucide="users"></i>Family</div><div><i data-lucide="user-round"></i>Account</div></div>
+          <div class="card"><div class="driver"><div class="av">SY</div><div><div class="nm">Suresh Yadav</div><div class="mt">Police-verified · ★ 4.9 · coaching routes</div></div><div class="plate">DL 1ER 9032</div></div></div>
+          <div class="list"><div class="li"><i data-lucide="map-pin"></i>Live location until she's home</div><div class="li"><i data-lucide="shield-check"></i>Same driver, same route, every day</div><div class="li"><i data-lucide="bell"></i>Alert if the route changes</div></div>
         </div>
       </section>
     </div></div>
   </main>
 </div>
 <script>
-const SCREENS=[
-  ['s1','Last mile from the metro','DTU student · Rohini Sec 18-19'],
-  ['s2','Seat booked','It waits at the gate, paid by UPI'],
-  ['s3','New in the city','Cheapest way, Kurla → BKC'],
-  ['s4','Live bus','See it coming, ticket in hand'],
-  ['s5','Pune → Mumbai pool','Fixed price, invoice, support'],
-  ['s6','Parent view','Coaching ride, tracked home']
-];
-const nav=document.getElementById('nav');
-nav.innerHTML=SCREENS.map((s,i)=>`<button data-go="${s[0]}"><span class="n">${i+1}</span><span>${s[1]}<small>${s[2]}</small></span></button>`).join('');
-
-/* stylised dark maps */
+const SCREENS=[['Aarav · DTU student, Delhi'],
+  ['s1','Plan the trip','Model Town → DTU, 3 ways'],['s2','Swap any leg','E-rickshaw, bike or cab'],['s3','Pick your seat','In the e-rickshaw'],['s4','Pay once','The whole trip, one UPI'],['s5','On the way','Seat waits at Gate 3'],
+  ['Sameer · Pune → Mumbai'],['s6','Pool vs solo cab','Then pick a car'],['s7','Pick a seat','Invoice for office'],
+  ['Karan · new to Mumbai'],['s8','Cheapest way','Live bus, ticket inside'],
+  ['A parent'],['s9','Coaching ride home','Tracked until home']];
+const nav=document.getElementById('nav');let n=0;
+nav.innerHTML=SCREENS.map(s=>s.length===1?`<div class="chap">${s[0]}</div>`:`<button data-go="${s[0]}"><span class="n">${++n}</span><span>${s[1]}<br><span style="color:#6e6e76;font-size:12px">${s[2]}</span></span></button>`).join('');
 function streets(seed){let s=seed,r=()=>{s=(s*9301+49297)%233280;return s/233280};let p='';
   for(let i=0;i<14;i++){const y=r()*900;p+=`<path d="M-20 ${y} C 120 ${y+r()*80-40}, 260 ${y+r()*80-40}, 420 ${y+r()*60-30}" stroke="#202024" stroke-width="${r()<.3?9:4}" fill="none"/>`}
-  for(let i=0;i<10;i++){const x=r()*390;p+=`<path d="M${x} -20 C ${x+r()*60-30} 300, ${x+r()*60-30} 600, ${x+r()*40-20} 900" stroke="#1c1c20" stroke-width="${r()<.3?8:3.5}" fill="none"/>`}
-  return p}
+  for(let i=0;i<10;i++){const x=r()*390;p+=`<path d="M${x} -20 C ${x+r()*60-30} 300, ${x+r()*60-30} 600, ${x+r()*40-20} 900" stroke="#1c1c20" stroke-width="${r()<.3?8:3.5}" fill="none"/>`}return p}
+const T=(x,y,t,c='#d4d4d8')=>`<text x="${x}" y="${y}" fill="${c}" font-size="12.5" font-family="Inter" font-weight="700">${t}</text>`;
 const MAPS={
- metro:`${streets(7)}<rect x="250" y="120" width="120" height="90" rx="14" fill="#13261b"/><path d="M-10 250 L 160 300 L 230 330 L 420 380" stroke="#ffcc00" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="160" cy="300" r="10" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><path d="M160 300 C 200 250, 250 220, 300 165" stroke="#00c46a" stroke-width="5" fill="none" stroke-dasharray="2 10" stroke-linecap="round"/><circle cx="300" cy="165" r="9" fill="#00c46a"/><text x="174" y="322" fill="#9a9aa2" font-size="12" font-family="Inter" font-weight="700">Rohini 18-19</text><text x="262" y="150" fill="#6fd39e" font-size="12" font-family="Inter" font-weight="700">DTU</text>`,
- booked:`${streets(11)}<path d="M120 420 C 180 360, 230 300, 300 200" stroke="#00c46a" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="120" cy="420" r="11" fill="#fff"/><rect x="104" y="372" width="32" height="24" rx="7" fill="#00c46a"/><text x="111" y="389" font-size="14">🛺</text><circle cx="300" cy="200" r="9" fill="#fff"/><text x="138" y="430" fill="#d4d4d8" font-size="12.5" font-family="Inter" font-weight="700">Gate 3</text>`,
- mumbai:`${streets(23)}<path d="M40 470 C 120 400, 200 380, 330 230" stroke="#3d7bff" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="40" cy="470" r="10" fill="#fff"/><circle cx="330" cy="230" r="10" fill="#3d7bff"/><text x="56" y="490" fill="#d4d4d8" font-size="12.5" font-family="Inter" font-weight="700">Kurla (W)</text><text x="276" y="214" fill="#9fbcff" font-size="12.5" font-family="Inter" font-weight="700">BKC</text>`,
- bus:`${streets(31)}<path d="M60 160 C 140 200, 200 260, 300 330" stroke="#00c46a" stroke-width="6" fill="none" stroke-linecap="round"/><rect x="50" y="146" width="34" height="26" rx="7" fill="#00c46a"/><text x="58" y="164" font-size="14">🚌</text><circle cx="300" cy="330" r="10" fill="#fff"/>`,
- highway:`${streets(41)}<path d="M30 520 C 120 420, 140 300, 230 230 S 300 150, 330 126" stroke="#00c46a" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="30" cy="520" r="10" fill="#fff"/><circle cx="330" cy="126" r="10" fill="#00c46a"/><text x="44" y="512" fill="#d4d4d8" font-size="12.5" font-family="Inter" font-weight="700">Baner, Pune</text><text x="268" y="150" fill="#6fd39e" font-size="12.5" font-family="Inter" font-weight="700">BKC, Mumbai</text>`,
- coaching:`${streets(53)}<path d="M80 470 C 150 420, 220 380, 300 260" stroke="#00c46a" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="300" cy="260" r="10" fill="#fff"/><circle cx="80" cy="470" r="13" fill="#00c46a" stroke="#0b0c0e" stroke-width="4"/>`
-};
+ plan:`${streets(5)}<path d="M60 330 L 110 290" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><path d="M110 290 L 290 170" stroke="#ffcc00" stroke-width="7" stroke-linecap="round"/><path d="M290 170 L 340 115" stroke="#00c46a" stroke-width="5" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="60" cy="330" r="9" fill="#fff"/><circle cx="110" cy="290" r="8" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="290" cy="170" r="8" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><circle cx="340" cy="115" r="10" fill="#00c46a"/>${T(30,356,'PG')}${T(126,304,'Model Town')}${T(186,186,'Rohini 18-19','#ffe48a')}${T(300,148,'DTU','#6fd39e')}`,
+ metro:`${streets(7)}<path d="M-10 250 L 160 300 L 230 330 L 420 380" stroke="#ffcc00" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="160" cy="300" r="10" fill="#0b0c0e" stroke="#ffcc00" stroke-width="4"/><path d="M160 300 C 200 250, 250 220, 300 165" stroke="#00c46a" stroke-width="5" fill="none" stroke-dasharray="2 10" stroke-linecap="round"/><circle cx="300" cy="165" r="9" fill="#00c46a"/>${T(174,322,'Rohini 18-19','#9a9aa2')}${T(262,150,'DTU','#6fd39e')}`,
+ mumbai:`${streets(23)}<path d="M40 330 C 120 280, 200 260, 330 150" stroke="#3d7bff" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="40" cy="330" r="10" fill="#fff"/><circle cx="330" cy="150" r="10" fill="#3d7bff"/><rect x="150" y="248" width="34" height="26" rx="7" fill="#00c46a"/><text x="158" y="266" font-size="14">🚌</text>${T(56,354,'Kurla (W)')}${T(276,136,'BKC','#9fbcff')}`,
+ coaching:`${streets(53)}<path d="M80 380 C 150 330, 220 290, 300 190" stroke="#00c46a" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="300" cy="190" r="10" fill="#fff"/><circle cx="80" cy="380" r="13" fill="#00c46a" stroke="#0b0c0e" stroke-width="4"/>`};
 document.querySelectorAll('[data-map]').forEach(m=>m.innerHTML=`<svg viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice"><rect width="390" height="844" fill="#0b0c0e"/>${MAPS[m.dataset.map]}</svg>`);
-
+const legs={1:[15,6,'Shared e-rickshaw'],3:[20,9,'Shared e-rickshaw']};
+function recalc(){const p=legs[1][0]+legs[3][0]+32, m=legs[1][1]+legs[3][1]+21, end=8*60+12+m;
+  const t=`${Math.floor(end/60)}:${String(end%60).padStart(2,'0')}`;
+  const set=(id,v)=>document.getElementById(id).textContent=v;
+  set('tt',m+' min');set('tp','₹'+p);set('ta',`Reach DTU ${t} · class at 9`);
+  set('l1p','₹'+legs[1][0]);set('l3p','₹'+legs[3][0]);
+  set('l1d',`${legs[1][2]} · ${legs[1][1]} min · 1.5 km`);set('l3d',`${legs[3][2]} · ${legs[3][1]} min · 2.5 km`);
+  set('p1','₹'+legs[1][0]);set('p3','₹'+legs[3][0]);set('r1',`${legs[1][2]} · ${legs[1][1]} min`);
+  set('pt','₹'+p);set('paybtn','Pay ₹'+p);}
 function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===id));
-  nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));
-  if(location.hash!=='#'+id)history.replaceState(null,'','#'+id+(document.body.classList.contains('shot')?'':''));}
+  const v=document.getElementById(id);document.getElementById('status').classList.toggle('dk',!v.hasAttribute('data-dark'));
+  nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.go===id));history.replaceState(null,'',location.search+'#'+id);}
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
-  const o=e.target.closest('[data-sel]');if(o){o.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));o.classList.add('sel')}});
-document.addEventListener('keydown',e=>{const ids=SCREENS.map(s=>s[0]);const cur=ids.indexOf((document.querySelector('.view.on')||{}).id);
+  const sw=e.target.closest('.sw');if(sw){const box=sw.parentElement;box.querySelectorAll('.sw').forEach(x=>x.classList.remove('on'));sw.classList.add('on');
+    const [p,m,l]=sw.dataset.v.split(',');legs[box.dataset.leg]=[+p,+m,l];recalc();return}
+  const st=e.target.closest('[data-seat]');if(st){st.closest('.veh').querySelectorAll('[data-seat]').forEach(x=>{x.classList.remove('mine');x.innerHTML='<i data-lucide="armchair"></i>Free'});st.classList.add('mine');st.innerHTML='<i data-lucide="check"></i>Yours';lucide.createIcons();return}
+  const o=e.target.closest('[data-sel]');if(o){o.parentElement.querySelectorAll('[data-sel]').forEach(x=>x.classList.remove('sel'));o.classList.add('sel')}});
+const ids=SCREENS.filter(s=>s.length>1).map(s=>s[0]);
+document.addEventListener('keydown',e=>{const cur=ids.indexOf((document.querySelector('.view.on')||{}).id);
   if(e.key==='ArrowRight')go(ids[Math.min(ids.length-1,cur+1)]);if(e.key==='ArrowLeft')go(ids[Math.max(0,cur-1)]);});
-const params=new URLSearchParams(location.search);if(params.has('shot'))document.body.classList.add('shot');
-go((location.hash||'#s1').slice(1));
-window.addEventListener('hashchange',()=>go((location.hash||'#s1').slice(1)));
-window.go=go;
-lucide.createIcons();
+if(new URLSearchParams(location.search).has('shot')){document.body.classList.add('shot');document.documentElement.classList.add('shot')}
+function fit(){const ph=document.getElementById('phone');if(document.body.classList.contains('shot')||innerWidth<860){ph.style.transform='';return}
+  const sc=Math.min(1,(innerHeight-40)/868);ph.style.transform=sc<1?`scale(${sc})`:'';}
+addEventListener('resize',fit);fit();
+window.go=go;addEventListener('hashchange',()=>go((location.hash||'#s1').slice(1)));
+go((location.hash||'#s1').slice(1));recalc();lucide.createIcons();
 </script>
 </body>
 </html>
